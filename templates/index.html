@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../static/styles.css" />
+    <title>HiIsCool</title>
+    <style>
+      /* Carousel Styles */
+      .carousel-container {
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .carousel img {
+        width: 100%;
+        flex-shrink: 0;
+        object-fit: cover;
+      }
+
+      .main-nav {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>HiIsCool</h1>
+    </header>
+    <!-- <section class="banner">
+      <img
+        src="../img/banner.jpg"
+        alt="marioclub welcome banner"
+      />
+    </section> -->
+    <nav class="main-nav">
+      <ul>
+        <li><a href="/login" class="join">Login</a></li>
+        <li><a href="/jobs">Job Portal</a></li>
+        <li><a href="/hiring">Now Hiring!</a></li>
+        <li><a href="/faq">FAQs and Support</a></li>
+      </ul>
+    </nav>
+
+    <!-- Carousel Section -->
+    <div class="carousel-container">
+      <div class="carousel">
+        <img src="/static/img/forsythbuilding.jpg" alt="Carousel Image 1">
+        <img src="/static/img/dawsonbuilding.jpg" alt="Carousel Image 2">
+        <img src="/static/img/unionbuilding.webp" alt="Carousel Image 3">
+        <img src="/static/img/lumpkinbuilding.jpg" alt="Carousel Image 4">
+      </div>
+    </div>
+    <main>
+      <article class="quote-section">
+        <blockquote>
+          HiIsCool has been a game-changer for me! It's the perfect platform to showcase my skills and connect 
+          with local businesses. I never imagined I'd have so many opportunities right at my fingertips. This 
+          website truly empowers high school students to take the first step toward their professional future!
+        </blockquote>
+        <p class="quote-author">– Alex, a proud user of HiIsCool</p>
+      </article>
+    </footer>
+
+    <script>
+      const carousel = document.querySelector('.carousel');
+      const images = document.querySelectorAll('.carousel img');
+      let index = 0;
+
+      function showNextImage() {
+        index = (index + 1) % images.length; // Cycle through images
+        carousel.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      // Change image every 5 seconds
+      setInterval(showNextImage, 5000);
+    </script>
+  </body>
+  <section class="cta-banner">
+    <h2>Ready to Start Your Journey?</h2>
+    <p>Join now and take your first step toward your future!</p>
+    <a href="/login.html" class="cta-button">Get Started</a>
+  </section>
+  
+  <!-- Divider Section -->
+  <div class="divider"></div>
+  
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2024 HiIsCool. All rights reserved.</p>
+      <p>Designed with ❤️ by HiIsCool Team</p>
+    </div>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+    </div>
+  </footer>
+  

@@ -1,0 +1,405 @@
+/* General Reset and Default Styles */
+body, ul, li, h1, h2, a {
+  margin: 0;
+  padding: 0;
+  font-family: tahoma; /* Sets the default font for these elements */
+}
+
+p {
+  font-size: 18px; /* Sets a default font size for all paragraphs */
+}
+
+/* Header Section */
+header {
+  background-color: #2b6777; /* Dark blue background for the header */
+  padding: 20px 0; /* Vertical padding inside the header */
+  text-align: center; /* Center-aligns the content */
+  position: fixed; /* Fixes the header at the top of the page */
+  width: 100%; /* Makes the header span the entire width */
+  top: 0; /* Positions the header at the top of the viewport */
+  left: 0;
+  z-index: 1; /* Ensures the header stays above other elements */
+}
+
+header h1 {
+  color: white; /* Sets the text color to white */
+  border: 8px solid white; /* Adds a white border around the text */
+  display: inline-block; /* Ensures the heading takes only as much space as its content */
+  padding: 6px 12px; /* Adds padding inside the heading */
+  border-radius: 36px; /* Makes the border circular */
+}
+
+/* Banner Section */
+.banner {
+  position: relative; /* Enables absolute positioning for child elements */
+}
+
+.banner img {
+  max-width: 100%; /* Ensures the banner image scales responsively */
+}
+
+.banner .welcome {
+  background: rgba(242, 242, 242, 0.85); /* Light gray background with transparency */
+  color: #f2f2f2; /* Sets text color to white */
+  padding: 30px; /* Adds padding inside the welcome message */
+  font-size: 60px; /* Large font size for the welcome message */
+  position: absolute; /* Positions it over the banner image */
+  left: 0; /* Aligns the text to the left */
+  top: 30%; /* Positions the text 30% from the top of the banner */
+}
+
+.banner .welcome span {
+  font-size: 1.4em; /* Makes the span text slightly larger */
+}
+
+/* Navigation Bar */
+nav {
+  background: #F4F4F4; /* Light gray background for the navigation bar */
+  padding: 20px; /* Adds padding inside the nav bar */
+  position: sticky; /* Makes the nav bar sticky (sticks to the top when scrolled) */
+  top: 106px; /* Positions the nav bar below the fixed header */
+  z-index: 1; /* Ensures it stays above other elements */
+}
+
+nav ul {
+  white-space: nowrap; /* Prevents items from wrapping onto a new line */
+  max-width: 1200px; /* Limits the width of the nav bar */
+  margin: 0 auto; /* Centers the nav bar content */
+  text-align: center; /* Aligns navigation links in the center */
+}
+
+nav li {
+  width: 25%; /* Makes each navigation item take up 25% of the width */
+  display: inline-block; /* Aligns the links horizontally */
+  font-size: 24px; /* Sets the font size for nav items */
+}
+
+nav li a {
+  text-decoration: none; /* Removes underline from links */
+  color: #4B4B4B; /* Sets the link color to dark gray */
+}
+
+nav li a:hover {
+  text-decoration: underline; /* Adds an underline on hover */
+}
+
+nav li a.join {
+  color: #2b6777; /* Highlights the "Register" link with a different color */
+}
+
+/* Main Content */
+main {
+  max-width: 100%; /* Allows the main section to scale responsively */
+  width: 1200px; /* Limits the width of the main section */
+  margin: 80px auto; /* Centers the main section and adds top margin */
+  padding: 0 40px; /* Adds horizontal padding */
+  box-sizing: border-box; /* Includes padding in the element's total width/height */
+  text-align: center; /* Centers the text content */
+}
+
+/* Article Section */
+article h2 {
+  color: #2b6777; /* Dark blue color for headings */
+  font-size: 48px; /* Large font size for headings */
+}
+
+article p {
+  line-height: 2em; /* Increases spacing between lines of text */
+  color: #4B4B4B; /* Dark gray color for text */
+}
+
+article p::first-line {
+  font-weight: bold; /* Makes the first line bold */
+  font-size: 1.2em; /* Slightly larger font for the first line */
+}
+
+/* Quote Section Styling */
+.quote-section {
+  background: linear-gradient(135deg, #f2f2f2, #c8d8e4); /* Adds a gradient background */
+  border-radius: 10px; /* Rounds the corners */
+  padding: 20px; /* Adds padding around the quote */
+  margin: 20px auto; /* Adds vertical margin and centers the section */
+  max-width: 800px; /* Limits the width of the section */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+  text-align: center; /* Centers the text */
+  color: #333; /* Dark gray color for text */
+  font-family: 'Georgia', serif; /* Classic serif font for a formal look */
+}
+
+.quote-section blockquote {
+  font-size: 1.5rem; /* Large font size for the quote */
+  font-style: italic; /* Italicizes the text */
+  line-height: 1.8; /* Increases line spacing */
+  margin: 0; /* Removes default margins */
+  quotes: "“" "”" "‘" "’"; /* Defines custom quote marks */
+}
+
+.quote-section blockquote:before {
+  content: open-quote; /* Adds an opening quotation mark */
+  font-size: 2rem; /* Makes it larger */
+  color: #52ab98; /* Green color for quotation marks */
+  vertical-align: -10px; /* Aligns the mark with the text */
+}
+
+.quote-section blockquote:after {
+  content: close-quote; /* Adds a closing quotation mark */
+  font-size: 2rem; /* Matches the size of the opening mark */
+  color: #52ab98; /* Matches the color of the opening mark */
+  vertical-align: -10px; /* Aligns the mark with the text */
+}
+
+.quote-author {
+  font-size: 1.2rem; /* Slightly smaller font for the author */
+  font-weight: bold; /* Makes the author's name bold */
+  margin-top: 15px; /* Adds space above the author's name */
+  color: #555; /* Dark gray color */
+}
+
+/* Apply hover effect to images inside the quote section */
+.quote-section :hover {
+  top: -4px; /* Moves the image slightly upward on hover */
+  position: relative; /* Ensure the image is positioned relatively for the top property to work */
+}
+
+/* Form Styling */
+form input {
+  margin: 20px 0; /* Adds vertical spacing */
+  padding: 10px 20px; /* Adds padding inside the input field */
+  font-size: 24px; /* Large font size for input text */
+  border-radius: 28px; /* Rounds the corners of the input field */
+  border: 4px solid #f2f2f2; /* Adds a white border */
+}
+
+form input:focus {
+  border: 4px dashed #4B4B4B; /* Changes border style when focused */
+  outline: none; /* Removes default outline */
+}
+
+form input:valid {
+  border: 4px solid #52ab98; /* Changes border color for valid input */
+}
+
+p {
+  font-size: 18px; /* Sets a default font size for all paragraphs */
+}
+
+/* Header Section */
+header {
+  background-color: #2b6777; /* Dark blue background for the header */
+  padding: 20px 0; /* Vertical padding inside the header */
+  text-align: center; /* Center-aligns the content */
+  position: fixed; /* Fixes the header at the top of the page */
+  width: 100%; /* Makes the header span the entire width */
+  top: 0; /* Positions the header at the top of the viewport */
+  left: 0;
+  z-index: 1; /* Ensures the header stays above other elements */
+}
+
+header h1 {
+  color: #f2f2f2; /* Sets the text color to white */
+  border: 8px solid #f2f2f2; /* Adds a white border around the text */
+  display: inline-block; /* Ensures the heading takes only as much space as its content */
+  padding: 6px 12px; /* Adds padding inside the heading */
+  border-radius: 36px; /* Makes the border circular */
+}
+
+/* Banner Section */
+.banner {
+  position: relative; /* Enables absolute positioning for child elements */
+}
+
+.banner img {
+  max-width: 100%; /* Ensures the banner image scales responsively */
+}
+
+
+/* Navigation Bar */
+nav {
+  background: #F4F4F4; /* Light gray background for the navigation bar */
+  padding: 20px; /* Adds padding inside the nav bar */
+  position: sticky; /* Makes the nav bar sticky (sticks to the top when scrolled) */
+  top: 106px; /* Positions the nav bar below the fixed header */
+  z-index: 1; /* Ensures it stays above other elements */
+}
+
+nav ul {
+  white-space: nowrap; /* Prevents items from wrapping onto a new line */
+  max-width: 1200px; /* Limits the width of the nav bar */
+  margin: 0 auto; /* Centers the nav bar content */
+  text-align: center; /* Aligns navigation links in the center */
+}
+
+nav li {
+  width: 25%; /* Makes each navigation item take up 25% of the width */
+  display: inline-block; /* Aligns the links horizontally */
+  font-size: 24px; /* Sets the font size for nav items */
+}
+
+nav li a {
+  text-decoration: none; /* Removes underline from links */
+  color: #4B4B4B; /* Sets the link color to dark gray */
+}
+
+nav li a:hover {
+  text-decoration: underline; /* Adds an underline on hover */
+}
+
+nav li a.join {
+  color: #2b6777; /* Highlights the "Register" link with a different color */
+}
+
+/* Main Content */
+main {
+  max-width: 100%; /* Allows the main section to scale responsively */
+  width: 1200px; /* Limits the width of the main section */
+  margin: 80px auto; /* Centers the main section and adds top margin */
+  padding: 0 40px; /* Adds horizontal padding */
+  box-sizing: border-box; /* Includes padding in the element's total width/height */
+  text-align: center; /* Centers the text content */
+}
+
+/* Article Section */
+article h2 {
+  color: #2b6777; /* Dark blue color for headings */
+  font-size: 48px; /* Large font size for headings */
+}
+
+article p {
+  line-height: 2em; /* Increases spacing between lines of text */
+  color: #4B4B4B; /* Dark gray color for text */
+}
+
+article p::first-line {
+  font-weight: bold; /* Makes the first line bold */
+  font-size: 1.2em; /* Slightly larger font for the first line */
+}
+
+/* Quote Section Styling */
+.quote-section {
+  background: linear-gradient(135deg, #f2f2f2, #c8d8e4); /* Adds a gradient background */
+  border-radius: 10px; /* Rounds the corners */
+  padding: 20px; /* Adds padding around the quote */
+  margin: 20px auto; /* Adds vertical margin and centers the section */
+  max-width: 800px; /* Limits the width of the section */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
+  text-align: center; /* Centers the text */
+  color: #333; /* Dark gray color for text */
+  font-family: 'Georgia', serif; /* Classic serif font for a formal look */
+}
+
+.quote-section blockquote {
+  font-size: 1.5rem; /* Large font size for the quote */
+  font-style: italic; /* Italicizes the text */
+  line-height: 1.8; /* Increases line spacing */
+  margin: 0; /* Removes default margins */
+  quotes: "“" "”" "‘" "’"; /* Defines custom quote marks */
+}
+
+.quote-section blockquote:before {
+  content: open-quote; /* Adds an opening quotation mark */
+  font-size: 2rem; /* Makes it larger */
+  color: #52ab98; /* Green color for quotation marks */
+  vertical-align: -10px; /* Aligns the mark with the text */
+}
+
+.quote-section blockquote:after {
+  content: close-quote; /* Adds a closing quotation mark */
+  font-size: 2rem; /* Matches the size of the opening mark */
+  color: #52ab98; /* Matches the color of the opening mark */
+  vertical-align: -10px; /* Aligns the mark with the text */
+}
+
+.quote-author {
+  font-size: 1.2rem; /* Slightly smaller font for the author */
+  font-weight: bold; /* Makes the author's name bold */
+  margin-top: 15px; /* Adds space above the author's name */
+  color: #555; /* Dark gray color */
+}
+
+/* Images */
+.images li:hover {
+  top: -4px; /* Moves the image slightly upward on hover */
+}
+
+/* Form Styling */
+form input {
+  margin: 20px 0; /* Adds vertical spacing */
+  padding: 10px 20px; /* Adds padding inside the input field */
+  font-size: 24px; /* Large font size for input text */
+  border-radius: 28px; /* Rounds the corners of the input field */
+  border: 4px solid #f2f2f2; /* Adds a white border */
+}
+
+form input:focus {
+  border: 4px dashed #4B4B4B; /* Changes border style when focused */
+  outline: none; /* Removes default outline */
+}
+
+form input:valid {
+  border: 4px solid #52ab98; /* Changes border color for valid input */
+}
+
+.cta-banner {
+  background: #2b6777;
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+  border-radius: 20px; /* Rounds the corners of the banner */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow for depth */
+}
+
+.cta-banner h2 {
+  font-size: 36px;
+}
+
+.cta-banner p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.cta-button {
+  background-color: #52ab98;
+  color: #f2f2f2;
+  padding: 15px 30px;
+  font-size: 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  margin-top: 20px;
+}
+
+.cta-button:hover {
+  background-color: #c8d8e4;
+}
+
+.divider {
+  height: 2px; /* Height of the divider line */
+  background-color: #2b6777; /* Color of the divider (matches the primary theme) */
+  margin: 30px 0; /* Adds space around the divider */
+}
+
+footer {
+  background-color: #2b6777;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+.footer-content p {
+  margin: 5px 0;
+}
+
+.footer-links {
+  margin-top: 15px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
