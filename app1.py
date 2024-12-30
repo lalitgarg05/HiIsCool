@@ -55,7 +55,7 @@ def create_table():
         print(f"Error: {e}")
 
 # Function to add a new job to the database
-def add_job(title, company, location, description):
+def add_job(title, company, location, description, salary):
     try:
         # Hardcoded connection details
         host = 'localhost'
@@ -70,10 +70,10 @@ def add_job(title, company, location, description):
             database=database
         )
         cursor = conn.cursor()
-        cursor.execute('''INSERT INTO jobs (job_title, company_name, job_location, job_description)
-                          VALUES (%s, %s, %s, %s)''', (title, company, location, description))
+        cursor.execute('''INSERT INTO jobs (job_title, company_name, job_location, job_description, salary)
+                          VALUES (%s, %s, %s, %s, %s)''', (title, company, location, description, salary))
         conn.commit()
-        print("Job added successfully!")
+        print("\nJob added successfully!")
         conn.close()
     except Error as e:
         print(f"Error: {e}")
@@ -98,7 +98,7 @@ def view_jobs():
         jobs = cursor.fetchall()
 
         for job in jobs:
-            print(f"ID: {job[0]}, Title: {job[1]}, Company: {job[2]}, Location: {job[3]}, Description: {job[4]}")
+            print(f"ID: {job[0]}, Title: {job[1]}, Company: {job[3]}, Location: {job[5]}, Description: {job[2]}, Salary: {job[4]}")
         
         conn.close()
     except Error as e:
@@ -109,7 +109,7 @@ def main():
     create_database()  # Ensure the database is created
     create_table()     # Ensure the table is created
 
-    print("Welcome to the job listing system!")
+    print("Welcome to the job listing system!\n")
     while True:
         action = input("Would you like to (a)dd a new job or (v)iew all jobs? (Enter 'q' to quit): ").lower()
 
@@ -118,14 +118,16 @@ def main():
             company = input("Enter the company name: ")
             location = input("Enter the job location: ")
             description = input("Enter the job description: ")
-            add_job(title, company, location, description)
+            salary = input("Enter the Salary: ")
+            add_job(title, company, location, description, salary)
         elif action == 'v':
             view_jobs()
         elif action == 'q':
-            print("Goodbye!")
+            print("\nGoodbye!")
             break
         else:
             print("Invalid input. Please try again.")
 
 if __name__ == "__main__":
     main()
+    

@@ -20,7 +20,6 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
         try:
             conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor()
@@ -123,15 +122,11 @@ def logout():
     flash('You have been logged out.')
     return redirect('/login')
 
- 
 # Add jobs route
 @app.route('/addJobs', methods=['POST'])
 def add_jobs():
     app.logger.debug("addJobs endpoint called")
-    print('HELLO XX')
     try:
-        flash('XXX addJobs.')
-
         # Parse job details from the request body
         data = request.get_json()
         print(f"Received data: {data}")
@@ -162,6 +157,18 @@ def add_jobs():
         return jsonify({'error': f'Database error: {e}'}), 500
     except Exception as e:
         return jsonify({'error': f'Unexpected error: {e}'}), 500
-    
+
+@app.route('/getJobs', methods=['GET'])
+def get_jobs():
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT job_title AS jobTitle, job_description AS jobDescription, company_name AS companyName, salary AS baseSalary, job_location AS jobLocation FROM jobs")
+        jobs = cursor.fetchall()
+        conn.close()
+        return jsonify(jobs)
+    except Error as e:
+        return jsonify({'error': f'Database error: {e}'}), 500
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
