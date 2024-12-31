@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQs and Questions</title>
+  <link rel="stylesheet" href="../static/styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #c8d8e4, #f2f2f2);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: #2b6777;
+      color: #ffffff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      color: #2b6777;
+      margin-bottom: 20px;
+    }
+
+    .accordion {
+      margin-bottom: 20px;
+    }
+
+    .accordion-item {
+      margin-bottom: 10px;
+    }
+
+    .accordion-header {
+      background-color: #52ab98;
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .accordion-content {
+      display: none;
+      padding: 10px;
+      background-color: #f2f2f2;
+      border-left: 4px solid #52ab98;
+    }
+
+    .question-section {
+      margin-top: 40px; /* Add extra space above the question section */
+    }
+
+    .question-form {
+      background-color: #f2f2f2;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .question-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #2b6777;
+    }
+
+    .question-form input,
+    .question-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .question-form button {
+      padding: 10px 20px;
+      background-color: #2b6777;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .question-form button:hover {
+      background-color: #52ab98;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="accordion">
+        <div class="accordion-item">
+          <div class="accordion-header">What is HiIsCool?</div>
+          <div class="accordion-content">
+            HiIsCool is a platform that helps high school students connect with local businesses and opportunities.
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">How can I create an account?</div>
+          <div class="accordion-content">
+            You can create an account by clicking on the "Login" button at the top of the homepage and selecting "Sign Up."
+          </div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">Is HiIsCool free to use?</div>
+          <div class="accordion-content">
+            Yes, HiIsCool is completely free for students. Businesses may have premium options.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="question-section">
+      <h2>Have More Questions?</h2>
+      <form class="question-form" id="questionForm">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        
+        <label for="question">Your Question</label>
+        <textarea id="question" name="question" placeholder="Enter your question" rows="5" required></textarea>
+        
+        <button type="submit">Submit Question</button>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    // Accordion functionality
+    const headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+
+    // Form submission
+    const form = document.getElementById('questionForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const question = document.getElementById('question').value;
+
+      alert(`Thank you, ${name}! Your question has been submitted and is being reviewed.`);
+      
+      // Example of sending data to a backend (uncomment if backend exists)
+      /*
+      fetch('/submitQuestion', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name, email, question }),
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Your question has been successfully submitted!');
+        } else {
+          alert('There was an error submitting your question.');
+        }
+      })
+      .catch(error => console.error('Error:', error));
+      */
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
