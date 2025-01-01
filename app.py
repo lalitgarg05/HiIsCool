@@ -52,6 +52,16 @@ def hiring():
 def faq():
     return render_template('faq.html')
 
+# TOS page
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+# Privacy page
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
 # Add jobs route
 @app.route('/addjobs', methods=['POST'])
 def addJobs():
