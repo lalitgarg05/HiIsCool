@@ -4,10 +4,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/styles.css" />
     <title>HiIsCool</title>
-    <style>
+    <style>  
       /* Carousel Styles */
       .carousel-container {
-        width: 90%;
+        width: 80%;
         max-width: 800px;
         margin: 20px auto;
         overflow: hidden;
@@ -29,26 +29,89 @@
       .main-nav {
         margin-bottom: 20px;
       }
+
+      /* Call to Action Banner */
+      .cta-banner {
+        background-color: #2b6777;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .cta-banner h2 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .cta-button {
+        background-color: #f2f2f2;
+        color: #2b6777;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .cta-button:hover {
+        background-color: #2b6777;
+        color: white;
+      }
+
+      /* Footer Styles */
+      footer {
+        background-color: #f2f2f2;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .footer-content {
+        margin-bottom: 10px;
+      }
+
+      .footer-links a {
+        color: #2b6777;
+        text-decoration: none;
+        margin: 0 10px;
+      }
+
+      .footer-links a:hover {
+        text-decoration: underline;
+      }
+
+      /* Profile Picture Styles */
+      .profile-pic {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+
+      .profile-container {
+        display: flex;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
-    <header>
-      <h1>HiIsCool</h1>
+    <header style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #f2f2f2;">
+      <h1 style="margin: 0; font-size: 24px; color: #2b6777;">HiIsCool</h1>
+      <nav class="main-nav">
+        <ul style="display: flex; gap: 20px; list-style: none; padding: 0; margin: 0;">
+          <li><a href="/login" class="join" style="text-decoration: none; color: #2b6777;">Login</a></li>
+          <li><a href="/jobs" style="text-decoration: none; color: #2b6777;">Job Portal</a></li>
+          <li><a href="/hiring" style="text-decoration: none; color: #2b6777;">Now Hiring!</a></li>
+          <li><a href="/about" style="text-decoration: none; color: #2b6777;">About</a></li>
+        </ul>
+      </nav>
+
+      <!-- Profile Picture Section -->
+      <div class="profile-container">
+        <!-- Check if the user has uploaded a profile picture -->
+        <img src="/static/default-profile.png" alt="Profile Picture" class="profile-pic">
+        <span style="color: #2b6777; font-size: 14px;">User</span> <!-- You can replace "User" with dynamic username -->
+      </div>
     </header>
-    <!-- <section class="banner">
-      <img
-        src="../img/banner.jpg"
-        alt="marioclub welcome banner"
-      />
-    </section> -->
-    <nav class="main-nav">
-      <ul>
-        <li><a href="/login" class="join">Login</a></li>
-        <li><a href="/jobs">Job Portal</a></li>
-        <li><a href="/hiring">Now Hiring!</a></li>
-        <li><a href="/faq">FAQs and Support</a></li>
-      </ul>
-    </nav>
 
     <!-- Carousel Section -->
     <div class="carousel-container">
@@ -59,6 +122,7 @@
         <img src="/static/img/lumpkinbuilding.jpg" alt="Carousel Image 4">
       </div>
     </div>
+
     <main>
       <article class="quote-section">
         <blockquote>
@@ -68,6 +132,27 @@
         </blockquote>
         <p class="quote-author">– Alex, a proud user of HiIsCool</p>
       </article>
+    </main>
+
+    <!-- Call to Action Section -->
+    <section class="cta-banner">
+      <h2>Ready to Start Your Journey?</h2>
+      <p>Join now and take your first step toward your future!</p>
+      <a href="/login" class="cta-button">Get Started</a>
+    </section>
+    
+    <!-- Divider Section -->
+    <div class="divider"></div>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 HiIsCool. All rights reserved.</p>
+        <p>Designed with ❤️ by HiIsCool Team</p>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
+      </div>
     </footer>
 
     <script>
@@ -77,29 +162,11 @@
 
       function showNextImage() {
         index = (index + 1) % images.length; // Cycle through images
-        carousel.style.transform = `translateX(-${index * 100}%)`;
+        carousel.style.transform = `translateX(-${index * 100}%)`; // Correct syntax for transform
       }
 
       // Change image every 5 seconds
       setInterval(showNextImage, 5000);
     </script>
   </body>
-  <section class="cta-banner">
-    <h2>Ready to Start Your Journey?</h2>
-    <p>Join now and take your first step toward your future!</p>
-    <a href="/login" class="cta-button">Get Started</a>
-  </section>
-  
-  <!-- Divider Section -->
-  <div class="divider"></div>
-  
-  <footer>
-    <div class="footer-content">
-      <p>&copy; 2024 HiIsCool. All rights reserved.</p>
-      <p>Designed with ❤️ by HiIsCool Team</p>
-    </div>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a>
-    </div>
-  </footer>
-  
+</html>
