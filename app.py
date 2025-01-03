@@ -10,9 +10,10 @@ app.secret_key = 'your_secret_key'  # Secret key for sessions
 # Home route
 @app.route('/')
 def home():
-    if 'user' in session:
-        return render_template('index.html', user=session['user'])
-    return redirect('/login')
+    return render_template('index.html')
+    # if 'user' in session:
+    #     return render_template('index.html', user=session['user'])
+    # return redirect('/login')
 
 # Login route
 @app.route('/login', methods=['GET', 'POST'])
@@ -38,14 +39,18 @@ def login():
     return render_template('login.html')
 
 # Jobs page
-@app.route('/jobs')
+@app.route('/addNewJob')
 def jobs():
-    return render_template('jobs.html')
+    return render_template('postJobs.html')
+
+@app.route('/passcode')
+def passcode():
+    return render_template('passcode.html')
 
 # Hiring page
-@app.route('/hiring')
+@app.route('/jobs')
 def hiring():
-    return render_template('hiring.html')
+    return render_template('jobs.html')
 
 # FAQ page
 @app.route('/faq')

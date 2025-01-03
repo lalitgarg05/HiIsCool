@@ -10,8 +10,8 @@ p {
 }
 
 header h1 {
-  color: #f2f2f2; /* Sets the text color to white */
-  border: 8px solid #2b6777; /* Adds a white border around the text */
+  color: #EAE6DF; /* Lighter text color */
+  border: 8px solid #A7967E; /* Border with a warm color */
   display: inline-block; /* Ensures the heading takes only as much space as its content */
   padding: 6px 12px; /* Adds padding inside the heading */
   border-radius: 36px; /* Makes the border circular */
@@ -19,7 +19,6 @@ header h1 {
 
 /* Navigation Bar */
 nav {
-  background: #F4F4F4; /* Light gray background for the navigation bar */
   padding: 1px; /* Adds padding inside the nav bar */
   position: sticky; /* Makes the nav bar sticky (sticks to the top when scrolled) */
   top: 106px; /* Positions the nav bar below the fixed header */
@@ -41,7 +40,7 @@ nav li {
 
 nav li a {
   text-decoration: none; /* Removes underline from links */
-  color: #4B4B4B; /* Sets the link color to dark gray */
+  color: #142E54; /* Dark blue color for links */
   padding: 10px 20px; /* Adds padding inside the links */
   border-radius: 8px; /* Rounds the corners of the links */
   display: inline-block; /* Makes the links behave like buttons */
@@ -49,8 +48,8 @@ nav li a {
 }
 
 nav li a:hover {
-  background-color: #E3E4E7; /* Slightly darker blue background on hover */
-  color: white; /* Ensures the text remains visible */
+  background-color: #A7967E; /* Warm background on hover */
+  color: #EAE6DF; /* Ensures the text remains visible */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow on hover */
 }
 
@@ -66,7 +65,7 @@ main {
 
 /* Article Section */
 article h2 {
-  color: #2b6777; /* Dark blue color for headings */
+  color: #142E54; /* Dark blue color for headings */
   font-size: 48px; /* Large font size for headings */
 }
 
@@ -82,14 +81,14 @@ article p::first-line {
 
 /* Quote Section Styling */
 .quote-section {
-  background: linear-gradient(135deg, #f2f2f2, #c8d8e4); /* Adds a gradient background */
+  background: #EAE6DF; /* Lighter background color */
   border-radius: 10px; /* Rounds the corners */
   padding: 20px; /* Adds padding around the quote */
   margin: 20px auto; /* Adds vertical margin and centers the section */
   max-width: 800px; /* Limits the width of the section */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a subtle shadow */
   text-align: center; /* Centers the text */
-  color: #333; /* Dark gray color for text */
+  color: #142E54; /* Dark blue color for text */
   font-family: 'Georgia', serif; /* Classic serif font for a formal look */
 }
 
@@ -104,14 +103,14 @@ article p::first-line {
 .quote-section blockquote:before {
   content: open-quote; /* Adds an opening quotation mark */
   font-size: 2rem; /* Makes it larger */
-  color: #52ab98; /* Green color for quotation marks */
+  color: #A7967E; /* Warm color for quotation marks */
   vertical-align: -10px; /* Aligns the mark with the text */
 }
 
 .quote-section blockquote:after {
   content: close-quote; /* Adds a closing quotation mark */
   font-size: 2rem; /* Matches the size of the opening mark */
-  color: #52ab98; /* Matches the color of the opening mark */
+  color: #A7967E; /* Matches the color of the opening mark */
   vertical-align: -10px; /* Aligns the mark with the text */
 }
 
@@ -119,13 +118,13 @@ article p::first-line {
   font-size: 1.2rem; /* Slightly smaller font for the author */
   font-weight: bold; /* Makes the author's name bold */
   margin-top: 15px; /* Adds space above the author's name */
-  color: #555; /* Dark gray color */
+  color: #142E54; /* Dark blue color */
 }
 
 /* Button Styling */
 button {
-  background-color: #2b6777; /* Dark blue background */
-  color: white; /* White text */
+  background-color: #142E54; /* Dark blue background */
+  color: #EAE6DF; /* Lighter text color */
   padding: 12px 24px; /* Adds padding inside the button */
   border-radius: 8px; /* Rounds the corners */
   font-size: 18px; /* Sets font size */
@@ -136,7 +135,7 @@ button {
 }
 
 button:hover {
-  background-color: #52ab98; /* Changes background on hover */
+  background-color: #A7967E; /* Changes background on hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increases shadow size on hover */
 }
 
@@ -146,14 +145,14 @@ form input {
   padding: 10px 20px; /* Adds padding inside the input field */
   font-size: 24px; /* Large font size for input text */
   border-radius: 28px; /* Rounds the corners of the input field */
-  border: 4px solid #f2f2f2; /* Adds a white border */
+  border: 4px solid #C2CCC5; /* Adds a white border */
 }
 
 form input:focus {
-  border: 4px dashed #4B4B4B; /* Changes border style when focused */
+  border: 4px dashed #A7967E; /* Changes border style when focused */
   outline: none; /* Removes default outline */
 }
 
 form input:valid {
-  border: 4px solid #52ab98; /* Changes border color for valid input */
+  border: 4px solid #A7967E; /* Changes border color for valid input */
 }

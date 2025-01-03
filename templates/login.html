@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #b3d9ff, #6699cc);
+            background: linear-gradient(to bottom, #c2ccc5, #eae6df); /* Gradient from light gray to beige */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,7 +24,7 @@
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333;
+            color: #142e54; /* Dark blue for the heading */
             font-size: 24px;
         }
         form {
@@ -34,7 +34,7 @@
         label {
             margin-bottom: 5px;
             font-weight: bold;
-            color: #2b6777;
+            color: #2b6777; /* Teal color for labels */
         }
         input {
             margin-bottom: 15px;
@@ -47,14 +47,14 @@
             padding: 10px;
             border: none;
             border-radius: 4px;
-            background: #2b6777;
+            background: #142e54; /* Dark blue for the button */
             color: white;
             font-size: 16px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         button:hover {
-            background: #0056b3;
+            background: #a7967e; /* Warm color for button hover */
         }
         .terms {
             margin-bottom: 20px;
@@ -63,7 +63,7 @@
             color: #333;
         }
         .terms a {
-            color: #2b6777;
+            color: #2b6777; /* Teal color for links */
             text-decoration: none;
         }
         .terms a:hover {
@@ -75,43 +75,43 @@
         }
         .toggle a {
             text-decoration: none;
-            color: #2b6777;
+            color: #2b6777; /* Teal color for the toggle link */
         }
         .toggle a:hover {
             text-decoration: underline;
         }
     </style>
-    <!-- <link rel="stylesheet" href="../static/styles.css"> -->
 </head>
 <body>
     <div class="container">
-    <h2>Login</h2>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
-    <form method="POST" action="/login">
-        <label for="email-username">Username or Email Address</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
+        <h2>Login</h2>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="/login">
+            <label for="email-username">Username or Email Address</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
-        <div class="terms">
-            <p>
-                By continuing, you agree to our 
-                <a href="terms.html" target="_blank">Terms of Service</a> and 
-                <a href="privacy.html" target="_blank">Privacy Policy</a>.
-            </p>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
+            <div class="terms">
+                <p>
+                    By continuing, you agree to our 
+                    <a href="/terms" target="_blank">Terms of Service</a> and 
+                    <a href="/privacy" target="_blank">Privacy Policy</a>.
+                </p>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="toggle">
+            <p>Don't have an account? <a href="/register">Register here</a>.</p>
         </div>
-        <button type="submit">Login</button>
-    </form>
-    <div class="toggle">
-    <p>Don't have an account? <a href="/register">Register here</a>.</p>
-</div>
+    </div>
 </body>
 </html>

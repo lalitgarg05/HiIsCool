@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal</title>
+    <style>
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #c2ccc5, #eae6df); /* Applying #c2ccc5 and #eae6df */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        /* Container for the form */
+        .container {
+            width: 450px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Title */
+        h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #142e54; /* Applying #142e54 */
+        }
+
+        /* Label styling */
+        .questions label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #142e54; /* Applying #142e54 */
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Input and Textarea styling */
+        .questions input, .questions textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #a7967e; /* Applying #a7967e */
+            margin-bottom: 20px;
+            font-size: 16px;
+            background-color: #eae6df; /* Applying #eae6df */
+            transition: border-color 0.3s ease;
+        }
+
+        /* Input and Textarea focus effect */
+        .questions input:focus, .questions textarea:focus {
+            border-color: #142e54; /* Applying #142e54 */
+            outline: none;
+        }
+
+        /* Submit button styling */
+        .questions button {
+            width: 100%;
+            padding: 14px;
+            background-color: #142e54; /* Applying #142e54 */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        /* Button hover effect */
+        .questions button:hover {
+            background-color: #a7967e; /* Applying #a7967e */
+        }
+
+        /* Responsive design */
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* Warning Modal */
+        #warning-modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #warning-modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #warning-modal h3 {
+            color: #ff4d4d;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #warning-modal p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #close-warning-btn {
+            background-color: #142e54; /* Applying #142e54 */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        #close-warning-btn:hover {
+            background-color: #a7967e; /* Applying #a7967e */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Warning Modal -->
+    <div id="warning-modal">
+        <div id="warning-modal-content">
+            <h3>Warning!</h3>
+            <p>This page is strictly for companies only. Students are not allowed to access this section.</p>
+            <button id="close-warning-btn">I Understand</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Add a Job</h2>
+        
+        <form id="add-job-form" class="questions">
+            <label for="job-title">Job Title</label>
+            <input type="text" id="job-title" name="job_title" placeholder="Enter job title" required>
+
+            <label for="job-description">Job Description</label>
+            <textarea id="job-description" name="job_description" placeholder="Enter job description" required></textarea>
+
+            <label for="company-name">Company Name</label>
+            <input type="text" id="company-name" name="company_name" placeholder="Enter company name" required>
+
+            <label for="job-location">Job Location</label>
+            <input type="text" id="job-location" name="job_location" placeholder="Enter job location" required>
+
+            <label for="base-salary">Base Salary</label>
+            <input type="number" id="base-salary" name="base_salary" placeholder="Enter base salary" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Show the warning modal on page load
+        window.onload = function() {
+            const warningModal = document.getElementById('warning-modal');
+            warningModal.style.display = 'flex'; // Show the modal
+        };
+
+        // Close the warning modal
+        document.getElementById('close-warning-btn').addEventListener('click', function() {
+            const warningModal = document.getElementById('warning-modal');
+            warningModal.style.display = 'none'; // Hide the modal
+        });
+
+        document.getElementById('add-job-form').addEventListener('submit', function(e) {
+            e.preventDefault();  // Prevent default form submission
+
+            // Extract form data
+            const jobTitle = document.getElementById('job-title').value;
+            const jobDescription = document.getElementById('job-description').value;
+            const companyName = document.getElementById('company-name').value;
+            const jobLocation = document.getElementById('job-location').value;
+            const baseSalary = document.getElementById('base-salary').value;
+
+            // Send data using fetch API
+            fetch('/addJobs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    jobTitle,
+                    jobDescription,
+                    companyName,
+                    jobLocation,
+                    baseSalary
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Job added successfully!');
+                    window.location.href = '/hiring'; // Redirect to home page
+                } else {
+                    response.json().then(data => {
+                        alert(`Error: ${data.error}`);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An unexpected error occurred.');
+            });
+        });
+    </script>
+
+</body>
+</html>
