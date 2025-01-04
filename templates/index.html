@@ -40,7 +40,7 @@
 
       /* Call to Action Banner */
       .cta-banner {
-        background-color: #2b6777;
+        background-color: #142E54;
         color: white;
         padding: 20px;
         text-align: center;
@@ -53,7 +53,7 @@
 
       .cta-button {
         background-color: #f2f2f2;
-        color: #2b6777;
+        color: #142E54;
         padding: 10px 20px;
         border-radius: 5px;
         text-decoration: none;
@@ -61,7 +61,7 @@
       }
 
       .cta-button:hover {
-        background-color: #2b6777;
+        background-color: #142E54;
         color: white;
       }
 
@@ -77,7 +77,7 @@
       }
 
       .footer-links a {
-        color: #2b6777;
+        color: #142E54;
         text-decoration: none;
         margin: 0 10px;
       }
@@ -182,23 +182,45 @@
   </head>
   <body>
     <header style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; background-color: #f2f2f2;">
-      <h1 style="margin: 0; font-size: 24px; color: #2b6777;">HiIsCool</h1>
+      <h1 style="margin: 0; font-size: 24px; color: #142E54;">HiIsCool</h1>
       <nav class="main-nav">
-        <ul style="display: flex; gap: 20px; list-style: none; padding: 0; margin: 0;">
-          <li><a href="/addNewJob" style="text-decoration: none; color: #2b6777;">Post a Job</a></li>
-          <li><a href="/jobs" style="text-decoration: none; color: #2b6777;">Find a Job</a></li>
-          <li><a href="/about" style="text-decoration: none; color: #2b6777;">Resources</a></li>
-          <li><a href="/login" class="join" style="text-decoration: none; color: #2b6777;">Login</a></li>
-        </ul>
+          <ul style="display: flex; gap: 20px; list-style: none; padding: 0; margin: 0;">
+              <li><a href="/addNewJob" style="text-decoration: none; color: #142E54;">Post a Job</a></li>
+              <li><a href="/jobs" style="text-decoration: none; color: #142E54;">Find a Job</a></li>
+              
+              <!-- Resources with Dropdown -->
+              <li style="position: relative;">
+                <a href="/resources" style="text-decoration: none; color: #142E54;">Resources</a>
+                <ul style="position: absolute; top: 100%; left: 0; background-color: #f2f2f2; display: none; list-style: none; padding: 0; margin: 0; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <li><a href="/faq" style="text-decoration: none; color: #142E54; padding: 10px 20px; display: block; text-align: left;">FAQ</a></li></br>
+                    <li><a href="/contactUs" style="text-decoration: none; color: #142E54; padding: 10px 20px; display: block; text-align: left;">Contact Us</a></li>
+                </ul>
+            </li>
+  
+              <li><a href="/login" class="join" style="text-decoration: none; color: #142E54;">Login</a></li>
+          </ul>
       </nav>
-
+  
       <!-- Profile Picture Section -->
       <div class="profile-container">
-        <img src="/static/img/defaultProfile.jpg" alt="Profile Picture" class="profile-pic">
-        <span class="hover-text">Hello</span>
+          <img src="/static/img/defaultProfile.jpg" alt="Profile Picture" class="profile-pic">
+          <span class="hover-text">Hello</span>
       </div>
-    </header>
-
+  </header>
+  
+  <script>
+      // JavaScript for showing and hiding the dropdown
+      const resourcesMenu = document.querySelector('li > a[href="/resources"]').parentElement;
+      const dropdown = resourcesMenu.querySelector('ul');
+  
+      resourcesMenu.addEventListener('mouseenter', () => {
+          dropdown.style.display = 'block';
+      });
+  
+      resourcesMenu.addEventListener('mouseleave', () => {
+          dropdown.style.display = 'none';
+      });
+  </script>  
     <!-- New Intro Section -->
     <div class="intro-section">
       <h2>Your <span class="gradient-text">Future</span> <br>Begins with Us</h2>
@@ -639,9 +661,7 @@
       </div>
       <div class="footer-links">
         <a href="/terms">Terms of Service</a> | 
-        <a href="/privacy">Privacy Policy</a> | 
-        <a href="/contact">Contact Us</a> | 
-        <a href="/faq">FAQ</a>
+        <a href="/privacy">Privacy Policy</a>
       </div>
       <div class="footer-love">
         <p>Made with <span style="color: red;">&hearts;</span> by Coders</p>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #c2ccc5, #eae6df);
+            color: #142E54;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            background: linear-gradient(to right, #142E54, #a7967e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-info {
+            margin-bottom: 30px;
+        }
+
+        .contact-info h2 {
+            margin: 10px 0;
+        }
+
+        .contact-info p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .contact-info a {
+            color: #142E54;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .social-media {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            margin: 0 10px;
+            color: #142E54;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .social-media a:hover {
+            color: #a7967e;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input,
+        form textarea,
+        form button {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            background: #142E54;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        form button:hover {
+            background: #a7967e;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        footer a {
+            color: #142E54;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contact Us</h1>
+        <div class="contact-info">
+            <h2>Get in Touch</h2>
+            <p>Have questions or need help? Reach out to us:</p>
+            <p><strong>Email:</strong> <a href="mailto:Keentech2019@gmail.com">Keentech2019@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+14435641006">443-564-1006</a></p>
+            <p><strong>YouTube:</strong> <a href="https://www.youtube.com/channel/UCvxnk5JJUT0_vwDfAqLw3Nw" target="_blank">Kesav Mashup</a></p>
+        </div>
+
+        <h2>Contact Form</h2>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Your Message" required></textarea>
+            
+            <button type="submit">Send Message</button>
+        </form>
+
+        <div class="social-media">
+            <h2>Follow Us</h2>
+            <a href="https://www.youtube.com/channel/UCvxnk5JJUT0_vwDfAqLw3Nw" target="_blank">YouTube</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 HiIsCool. All rights reserved. <a href="/privacy">Privacy Policy</a></p>
+    </footer>
+</body>
+</html>

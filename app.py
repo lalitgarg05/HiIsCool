@@ -67,6 +67,10 @@ def terms():
 def privacy():
     return render_template('privacy.html')
 
+@app.route('/contactUs')
+def contact():
+    return render_template('contactUs.html')
+
 # Add jobs route
 @app.route('/addjobs', methods=['POST'])
 def addJobs():
