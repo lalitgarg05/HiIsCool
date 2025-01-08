@@ -2,9 +2,10 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 import mysql.connector
 from mysql.connector import Error
 from config import db_config  # Ensure this is correctly configured
+from werkzeug.security import generate_password_hash
+import bcrypt
 
 app = Flask(__name__)
-
 app.secret_key = 'your_secret_key'  # Secret key for sessions
 
 # Home route
@@ -120,11 +121,13 @@ def register():
         print(f"Received data: {data}")
         email = data.get('email')
         password = data.get('password')
-        print(f"Received data:" + email + password)
+        
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
         try:
             conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor()
-            cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (email, password))
+            cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (email, hashed_password))
             conn.commit()
             conn.close()
 
