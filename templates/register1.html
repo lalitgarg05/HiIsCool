@@ -3,123 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Register</title>
+    <title>Register</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #89c4e1, #6aaed6);
+            background: linear-gradient(to bottom, #c2ccc5, #eae6df); /* Updated gradient colors */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #333;
         }
+
         .container {
-            width: 450px;
+            width: 500px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background: #142e54; /* Updated color */
+            color: white;
+            border-radius: 10px 10px 0 0;
+            transition: background 0.3s ease;
+        }
+
+        .tab:hover,
+        .tab.active {
+            background: #a7967e; /* Updated hover/active color */
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #2b6777;
+            color: #142e54; /* Updated color */
+            font-size: 24px;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
+
         label {
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: bold;
+            color: #142e54; /* Updated color */
         }
-        input {
+
+        input,
+        select {
             margin-bottom: 15px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 16px;
         }
-        input:focus {
-            border-color: #2b6777;
-            outline: none;
-        }
+
         button {
-            padding: 12px;
+            padding: 10px;
             border: none;
-            border-radius: 6px;
-            background: #2b6777;
-            color: #fff;
-            font-size: 18px;
+            border-radius: 4px;
+            background: #142e54; /* Updated button color */
+            color: white;
+            font-size: 16px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
+
         button:hover {
-            background: #185a65;
+            background: #a7967e; /* Updated hover color */
         }
+
         .terms {
-            font-size: 14px;
             margin-bottom: 20px;
-            text-align: center;
-            line-height: 1.5;
-        }
-        .terms a {
-            color: #2b6777;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .terms a:hover {
-            text-decoration: underline;
-        }
-        .toggle {
-            text-align: center;
-        }
-        .toggle p {
             font-size: 14px;
+            text-align: center;
+            color: #333;
         }
-        .toggle a {
+
+        .terms a {
+            color: #142e54; /* Updated color */
             text-decoration: none;
-            color: #2b6777;
-            font-weight: bold;
         }
-        .toggle a:hover {
+
+        .terms a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Register</h2>
-        <form action="index.html">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter your username" required>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('student')">Student Registration</div>
+            <div class="tab" onclick="switchTab('company')">Company Registration</div>
+        </div>
+        <div id="student" class="tab-content active">
+            <form>
+                <label for="school">Select Your Current School:</label>
+                <select id="school" name="school" required>
+                    <option value="" disabled selected>Select your school</option>
+                    <option value="school1">West Forsyth High School</option>
+                    <option value="school2">Denmark High School</option>
+                    <option value="school3">Alliance Innovation Academy</option>
+                    <option value="school4">Forsyth Central High School</option>
+                    <option value="school5">South Forsyth High School</option>
+                    <option value="school6">Lambert High School</option>
+                </select>
 
-            <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="Enter your email" required>
-
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
-
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" placeholder="Re-enter your password" required>
-
-            <div class="terms">
-                <p>
-                    By continuing, you agree to our 
-                    <a href="terms.html" target="_blank">Terms of Service</a> and 
-                    <a href="privacy.html" target="_blank">Privacy Policy</a>.
-                </p>
-            </div>
-
-            <button type="submit">Register</button>
-        </form>
-        <div class="toggle">
-            <p>
-                Already have an account? <a href="login.html">Login</a>
-            </p>
+                <label for="student-username">Email or Phone Number:</label>
+                <input type="text" id="student-username" name="username" placeholder="Enter your email or phone number" required>
+                
+                <div class="terms">
+                    <p>
+                        By continuing, you agree to our 
+                        <a href="/terms" target="_blank">Terms of Service</a> and 
+                        <a href="/privacy" target="_blank">Privacy Policy</a>.
+                    </p>
+                </div>
+                <a href="/register" target="_blank">
+                    <button type="button" onclick="sendPasscode()">Send me the Temporary Passcode</button>
+                </a>
+             </form>
+        </div>
+        <div id="company" class="tab-content">
+            <form>
+                <label for="company-name">Company Name:</label>
+                <input type="text" id="company-name" name="company_name" placeholder="Enter your company name" required>
+                <label for="company-username">Company Email:</label>
+                <input type="email" id="company-username" name="email" placeholder="Enter your company email" required>
+                <div class="terms">
+                    <p>
+                        By continuing, you agree to our 
+                        <a href="/terms" target="_blank">Terms of Service</a> and 
+                        <a href="/privacy" target="_blank">Privacy Policy</a>.
+                    </p>
+                </div>
+                <button type="button">Continue</button>
+            </form>
         </div>
     </div>
+
+    <script>
+        function switchTab(tabId) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            // Add active class to the selected tab and its content
+            document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+        function sendPasscode() {
+    // Get the selected school and username
+    const school = document.getElementById('school').value;
+    const username = document.getElementById('student-username').value;
+
+    // Validate inputs
+    if (!school || !username) {
+        alert('Please select a school and enter your email or phone number.');
+        return;
+    }
+
+    // Make the POST request
+    fetch('/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            school: school,
+            username: username,
+        }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json(); // Assuming the server responds with JSON
+        })
+        .then(data => {
+            // Handle success
+            alert('Temporary passcode sent successfully!');
+            console.log('Server Response:', data);
+        })
+        .catch(error => {
+            // Handle errors
+            alert('Failed to send the temporary passcode. Please try again later.');
+            console.error('Error:', error);
+        });
+}
+
+    </script>
 </body>
-</html
+</html>

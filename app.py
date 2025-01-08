@@ -72,8 +72,8 @@ def contact():
     return render_template('contactUs.html')
 
 # Add jobs route
-@app.route('/addjobs', methods=['POST'])
-def addJobs():
+@app.route('/addjobs1', methods=['POST'])
+def addJobs1():
     if 'user' not in session:
         return redirect('/login')
 
@@ -116,9 +116,11 @@ def addJobs():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
+        data = request.get_json()
+        print(f"Received data: {data}")
+        username = data.get('student-username')
+        school = data.get('school')
+        print(f"Received data:" + username + school)
         try:
             conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor()
@@ -143,8 +145,7 @@ def logout():
 
 # Add jobs route
 @app.route('/addJobs', methods=['POST'])
-def add_jobs():
-    app.logger.debug("addJobs endpoint called")
+def addJobs():
     try:
         # Parse job details from the request body
         data = request.get_json()

@@ -11,10 +11,8 @@ logging.basicConfig(level=logging.DEBUG)
 # Add jobs route
 @app.route('/addJobs', methods=['POST'])
 def add_jobs():
-    app.logger.debug("addJobs endpoint called")
     app.logger.debug(f"Request Content-Type: {request.content_type}")
     app.logger.debug(f"Request Data: {request.data}")
-    print('HELLO XX')
     try:
         print('HELLO 11')
         # Parse job details from the request body
