@@ -43,9 +43,9 @@ def login():
 def jobs():
     return render_template('postJobs.html')
 
-@app.route('/passcode')
-def passcode():
-    return render_template('passcode.html')
+# @app.route('/passcode')
+# def passcode():
+#     return render_template('passcode.html')
 
 # Hiring page
 @app.route('/jobs')
@@ -115,6 +115,32 @@ def addJobs1():
 # Register route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if request.method == 'POST':
+        data = request.get_json()
+        print(f"Received data: {data}")
+        email = data.get('email')
+        password = data.get('password')
+        print(f"Received data:" + email + password)
+        try:
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO users (username, password) VALUES (%s, %s)', (email, password))
+            conn.commit()
+            conn.close()
+
+            flash('Registration successful! Please log in.')
+            return redirect('/login')
+        except mysql.connector.IntegrityError:
+            #flash('Username already exists.')
+            print('Username already exists.')
+        except Error as e:
+            #flash(f'Database error: {e}')
+            print(f'Database error: {e}')
+    return render_template('register.html')
+
+# Register route
+@app.route('/register1', methods=['GET', 'POST'])
+def register1():
     if request.method == 'POST':
         data = request.get_json()
         print(f"Received data: {data}")
