@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, session, flash, jso
 import mysql.connector
 from mysql.connector import Error
 from config import db_config  # Ensure this is correctly configured
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 import bcrypt
 
 app = Flask(__name__)
@@ -25,20 +25,25 @@ def login():
         try:
             conn = mysql.connector.connect(**db_config)
             cursor = conn.cursor()
-            cursor.execute('SELECT * FROM users WHERE username = %s AND password = %s', (username, password))
+            cursor.execute('SELECT username, password FROM users WHERE username = %s', (username,))
             user = cursor.fetchone()
             conn.close()
 
             if user:
-                session['user'] = username
-                flash(f'Welcome back, {username}!')
-                return redirect('/')
+                print(f"Fetched User Data: {user}")
+                print(f"Fetched User Pwd: {user[1]}")
+                if bcrypt.checkpw(password.encode('utf-8'), user[1].encode('utf-8')):  # Assuming password is the second column in users table
+                    session['user'] = username
+                    flash(f'Welcome back, {username}!')
+                    return redirect('/')
+                else:
+                    flash('Invalid username or password.')
             else:
                 flash('Invalid username or password.')
         except Error as e:
             flash(f'Database error: {e}')
     return render_template('login.html')
-
+    
 # Jobs page
 @app.route('/addNewJob')
 def jobs():
@@ -121,7 +126,7 @@ def register():
         print(f"Received data: {data}")
         email = data.get('email')
         password = data.get('password')
-        
+
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         try:
