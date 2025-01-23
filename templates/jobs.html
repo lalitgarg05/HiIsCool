@@ -173,8 +173,21 @@
                     const applyButton = document.createElement('button');
                     applyButton.textContent = 'Apply Now';
                     applyButton.addEventListener('click', () => {
-                        //sendMail(job.companyEmail, job.jobTitle);
-                        sendMail();
+                        fetch('/send-apply-job-email', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        //body: JSON.stringify({ email: session['user'], msg: `Successfully applied for: ${job.companyName}` }),
+                        body: JSON.stringify({ email: 'lgfundas@gmail.com' }),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Apply job email sent successfully!');
+                        })
+                        .catch(error => {
+                            console.error('Error sending email:', error);
+                        });
                         //alert(`Successfully applied for: ${job.companyName}`);
                     });
                     jobCard.appendChild(applyButton);

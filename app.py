@@ -237,37 +237,6 @@ def get_jobs():
     except Error as e:
         return jsonify({'error': f'Database error: {e}'}), 500
 
-@app.route('/send-email1', methods=['POST'])
-def send_email1():
-    data = request.get_json()
-    email = data.get('email')
-    print(f"Received email: {data}")
-    if not email:
-        return jsonify({'error': 'Email is required'}), 400
-
-    try:
-        msg = MIMEText('Thank you for registering!')
-        msg['Subject'] = 'Registration Successful'
-        msg['From'] = os.getenv('EMAIL_ADDRESS')
-        msg['To'] = email
-
-        try:
-            with smtplib.SMTP('smtp.gmail.com', 587) as server:
-                server.starttls()
-                server.login(os.getenv('EMAIL_ADDRESS'), os.getenv('APP_PASSWORD'))
-                server.sendmail(os.getenv('EMAIL_ADDRESS'), email, msg.as_string())
-
-            return jsonify({'message': 'Email sent successfully!'}), 200
-        except smtplib.SMTPAuthenticationError:
-            print("Failed to send email: Authentication error. Check your email address and app password.")
-            return jsonify({'error': 'Authentication error. Check your email address and app password.'}), 500
-        except Exception as e:
-            print(f"Failed to send email: {e}")
-            return jsonify({'error': str(e)}), 500
-    except Exception as e:
-        print(f"Failed to create email: {e}")
-        return jsonify({'error': str(e)}), 500
-
 def get_credentials():
     creds = None
     token_path = 'token.json'
@@ -294,8 +263,38 @@ def send_email():
         return jsonify({'error': 'Email is required'}), 400
 
     try:
-        msg = MIMEText('Thank you for registering!')
+        msg = MIMEText('You have successfully registered on HiIsCool. We are excited to have you on board!')
         msg['Subject'] = 'Welcome to HiIsCool.'
+        msg['From'] = os.getenv('EMAIL_ADDRESS')
+        msg['To'] = email
+
+        raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
+
+        creds = get_credentials()
+        service = build('gmail', 'v1', credentials=creds)
+        message = {'raw': raw}
+
+        try:
+            message = (service.users().messages().send(userId='me', body=message).execute())
+            print(f"Message Id: {message['id']}")
+            return jsonify({'message': 'Email sent successfully!'}), 200
+        except Exception as e:
+            print(f"Failed to send email: {e}")
+            return jsonify({'error': str(e)}), 500
+    except Exception as e:
+        print(f"Failed to create email: {e}")
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/send-apply-job-email', methods=['POST'])
+def send_apply_job_email():
+    data = request.get_json()
+    email = data.get('email')
+    print(f"Received email: {data}")
+    if not email:
+        return jsonify({'error': 'Email is required'}), 400
+    try:
+        msg = MIMEText('You have successfully applied for the job!')
+        msg['Subject'] = 'HiIsCool: You have applied to the job.'
         msg['From'] = os.getenv('EMAIL_ADDRESS')
         msg['To'] = email
 
