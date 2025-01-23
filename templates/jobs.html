@@ -173,7 +173,9 @@
                     const applyButton = document.createElement('button');
                     applyButton.textContent = 'Apply Now';
                     applyButton.addEventListener('click', () => {
-                        alert(`Successfully applied for: ${job.companyName}`);
+                        //sendMail(job.companyEmail, job.jobTitle);
+                        sendMail();
+                        //alert(`Successfully applied for: ${job.companyName}`);
                     });
                     jobCard.appendChild(applyButton);
 
