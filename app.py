@@ -291,7 +291,7 @@ def send_apply_job_email():
     if not userEmail:
         return jsonify({'error': 'User is not logged In, Email is required'}), 400
     try:
-        msg = MIMEText('You have successfully applied for the job!')
+        msg = MIMEText('You have successfully applied for the job! \n\nWe will get back to you soon.')
         msg['Subject'] = f'HiIsCool: You have applied to the job at {companyName}.'
         msg['From'] = os.getenv('EMAIL_ADDRESS')
         msg['To'] = userEmail
