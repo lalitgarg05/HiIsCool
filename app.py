@@ -42,8 +42,6 @@ def login():
             conn.close()
 
             if user:
-                print(f"Fetched User Data: {user}")
-                print(f"Fetched User Pwd: {user[1]}")
                 if bcrypt.checkpw(password.encode('utf-8'), user[1].encode('utf-8')):  # Assuming password is the second column in users table
                     session['user'] = username
                     return redirect('/')
@@ -258,7 +256,6 @@ def get_credentials():
 def send_email():
     data = request.get_json()
     email = data.get('email')
-    print(f"Received email: {data}")
     if not email:
         return jsonify({'error': 'Email is required'}), 400
 
@@ -289,14 +286,15 @@ def send_email():
 def send_apply_job_email():
     data = request.get_json()
     email = data.get('email')
-    print(f"Received email: {data}")
-    if not email:
-        return jsonify({'error': 'Email is required'}), 400
+    companyName = data.get('companyName')
+    userEmail = session.get('user')
+    if not userEmail:
+        return jsonify({'error': 'User is not logged In, Email is required'}), 400
     try:
         msg = MIMEText('You have successfully applied for the job!')
-        msg['Subject'] = 'HiIsCool: You have applied to the job.'
+        msg['Subject'] = f'HiIsCool: You have applied to the job at {companyName}.'
         msg['From'] = os.getenv('EMAIL_ADDRESS')
-        msg['To'] = email
+        msg['To'] = userEmail
 
         raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
 
