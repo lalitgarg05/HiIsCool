@@ -54,7 +54,7 @@
 
     <div class="container">
         <h2>Student Profile</h2>
-        <form action="http://your-backend-url/api/students" method="post">
+        <form id="profile-form" action="/getProfile" method="post">
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
                 <label for="name" style="flex: 1; font-size: 14px;">Name:</label>
                 <input type="text" id="name" name="name" style="flex: 2;" required>
@@ -77,10 +77,10 @@
             <div style="display: flex; align-items: center; margin-bottom: 10px;">
                 <label for="grade" style="flex: 1; font-size: 14px;">Grade Level:</label>
                 <select id="grade" name="grade" style="flex: 2;">
-                    <option value="9">9th Grade</option>
-                    <option value="10">10th Grade</option>
-                    <option value="11">11th Grade</option>
-                    <option value="12">12th Grade</option>
+                    <option value="9">9th</option>
+                    <option value="10">10th</option>
+                    <option value="11">11th</option>
+                    <option value="12">12th</option>
                 </select>
             </div>
 
@@ -114,26 +114,31 @@
     </div>
 
     <script>
-        // Show the warning modal on page load
+        // Fetch user data and populate the form
         window.onload = function() {
-            const warningModal = document.getElementById('warning-modal');
-            if (warningModal) {
-                warningModal.style.display = 'flex'; // Show the modal
-            }
+            fetch('/getUserProfile')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('name').value = data.name;
+                    document.getElementById('email').value = data.email;
+                    document.getElementById('phone').value = data.phone;
+                    document.getElementById('skills').value = data.skills;
+                    document.getElementById('grade').value = data.grade_level;
+                    document.getElementById('school').value = data.school_name;
+                    document.getElementById('bio').value = data.bio;
+                    document.getElementById('interests').value = data.interests;
+                    document.getElementById('gpa').value = data.gpa;
+                    document.getElementById('extracurricular').value = data.extracurricular;
+                })
+                .catch(error => {
+                    console.error('Error fetching user data:', error);
+                });
         };
-    
-        // Close the warning modal
-        document.getElementById('close-warning-btn')?.addEventListener('click', function() {
-            const warningModal = document.getElementById('warning-modal');
-            if (warningModal) {
-                warningModal.style.display = 'none'; // Hide the modal
-            }
-        });
-    
+
         // Handle form submission
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.getElementById('profile-form').addEventListener('submit', function(e) {
             e.preventDefault();  // Prevent default form submission
-    
+
             // Extract form data
             const formData = {
                 name: document.getElementById('name').value,
@@ -147,9 +152,9 @@
                 gpa: document.getElementById('gpa').value,
                 extracurricular: document.getElementById('extracurricular').value
             };
-    
+
             // Send data using fetch API
-            fetch('/addProfile', {
+            fetch('/updateProfile', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

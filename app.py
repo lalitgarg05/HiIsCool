@@ -190,10 +190,30 @@ def register1():
             flash(f'Database error: {e}')
     return render_template('register.html')
 
+@app.route('/getUserProfile', methods=['GET'])
+def get_user_profile():
+    user_email = session.get('user')
+    if not user_email:
+        return jsonify({'error': 'User is not logged in'}), 401
+
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute('SELECT * FROM students_profile WHERE email = %s', (user_email,))
+        profile = cursor.fetchone()
+        print(f"Profile: {profile}")
+        conn.close()
+
+        if profile:
+            return jsonify(profile), 200
+        else:
+            return jsonify({'error': 'Profile not found'}), 404
+    except Error as e:
+        return jsonify({'error': f'Database error: {e}'}), 500
+
 # Route to add or update user profile
-@app.route('/addProfile', methods=['POST'])
-def addProfile():
-    
+@app.route('/updateProfile', methods=['POST'])
+def update_profile():    
     data = request.get_json()
     print(f"Hello {data}")
     try:
@@ -203,14 +223,14 @@ def addProfile():
         email = data.get('email')
         phone = data.get('phone')
         skills = data.get('skills')
-        grade_level = data.get('grade_level')
-        school_name = data.get('school_name')
+        grade_level = data.get('grade')
+        school_name = data.get('school')
         bio = data.get('bio')
         interests = data.get('interests')
         gpa = data.get('gpa')
         extracurricular = data.get('extracurricular')
         cursor.execute('''
-            INSERT INTO students (name, email, phone, skills, grade_level, school_name, bio, interests, gpa, extracurricular)
+            INSERT INTO students_profile (name, email, phone, skills, grade_level, school_name, bio, interests, gpa, extracurricular)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             ON DUPLICATE KEY UPDATE
                 email = VALUES(email),
@@ -243,7 +263,7 @@ def logout():
 
 # Add jobs route
 @app.route('/addJobs', methods=['POST'])
-def addJobs():
+def add_jobs():
     try:
         # Parse job details from the request body
         data = request.get_json()
