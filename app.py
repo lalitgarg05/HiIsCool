@@ -24,7 +24,21 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 @app.route('/')
 def home():
     user = session.get('user')
-    return render_template('index.html', user=user)
+    if user:
+        try:
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute('SELECT name FROM students_profile WHERE email = %s', (user,))
+            profile = cursor.fetchone()
+            conn.close()
+            if profile:
+                return render_template('index.html', user=profile['name'].split()[0])
+            else:
+                print("User profile not found.")
+        except Error as e:
+            print(f"Database error: {e}")
+    return render_template('index.html', user=None)
+        
     # if 'user' in session:
     #     return render_template('index.html', user=session['user'])
     # return redirect('/login')
@@ -147,7 +161,6 @@ def register():
             data = request.get_json()
         else:
             return jsonify({'error': 'Request content type must be application/json'}), 400
-        print(f"Received data: {data}")
         email = data.get('email')
         password = data.get('password')
 
@@ -201,7 +214,6 @@ def get_user_profile():
         cursor = conn.cursor(dictionary=True)
         cursor.execute('SELECT * FROM students_profile WHERE email = %s', (user_email,))
         profile = cursor.fetchone()
-        print(f"Profile: {profile}")
         conn.close()
 
         if profile:
@@ -215,7 +227,6 @@ def get_user_profile():
 @app.route('/updateProfile', methods=['POST'])
 def update_profile():    
     data = request.get_json()
-    print(f"Hello {data}")
     try:
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
@@ -346,7 +357,6 @@ def send_email():
 
         try:
             message = (service.users().messages().send(userId='me', body=message).execute())
-            print(f"Message Id: {message['id']}")
             return jsonify({'message': 'Email sent successfully!'}), 200
         except Exception as e:
             print(f"Failed to send email: {e}")
@@ -377,7 +387,6 @@ def send_apply_job_email():
 
         try:
             message = (service.users().messages().send(userId='me', body=message).execute())
-            print(f"Message Id: {message['id']}")
             return jsonify({'message': 'Email sent successfully!'}), 200
         except Exception as e:
             print(f"Failed to send email: {e}")

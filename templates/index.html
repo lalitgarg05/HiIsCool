@@ -166,6 +166,7 @@
       .gradient-text {
         background: linear-gradient(to right, #EAE6DF, #A7967E, #142E54);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
 
@@ -254,16 +255,18 @@
       </nav>
   
       <!-- Profile Picture Section -->
+      {% if user %}
 <div class="profile-container dropdown" style="position: relative; display: inline-block;">
     <img src="/static/img/defaultProfile.jpg" alt="Profile Picture" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" style="position: absolute !important; right: 0; z-index: 9999 !important;">
-        {% if user %}
+
             <span class="dropdown-item-text">Hello {{ user }}</span>
             <a class="dropdown-item" href="/profile">Profile</a>
             <a class="dropdown-item" href="/logout">Logout</a>
-        {% endif %}
+
     </div>
 </div>
+{% endif %}
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>

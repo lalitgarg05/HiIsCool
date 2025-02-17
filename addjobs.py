@@ -14,10 +14,8 @@ def add_jobs():
     app.logger.debug(f"Request Content-Type: {request.content_type}")
     app.logger.debug(f"Request Data: {request.data}")
     try:
-        print('HELLO 11')
         # Parse job details from the request body
         data = request.get_json()
-        print(f"Received data: {data}")
         jobTitle = data.get('jobTitle')
         jobDescription = data.get('jobDescription')
         companyName = data.get('companyName')
