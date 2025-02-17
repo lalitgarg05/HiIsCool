@@ -7,14 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #c2ccc5, #eae6df); /* Gradient from light gray to beige */
+            background: linear-gradient(to bottom, #c2ccc5, #eae6df);
             margin: 0;
             padding: 0;
         }
 
         .header {
-            background-color: #142e54; /* Dark blue for header */
-            color: #eae6df; /* Light text color */
+            background-color: #142e54;
+            color: #eae6df;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
@@ -28,8 +28,8 @@
 
         .header .home-btn {
             padding: 10px 15px;
-            background-color: #eae6df; /* Beige for button */
-            color: #142e54; /* Dark blue text color */
+            background-color: #eae6df;
+            color: #142e54;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -40,8 +40,21 @@
         }
 
         .header .home-btn:hover {
-            background-color: #a7967e; /* Warm color on hover */
+            background-color: #a7967e;
             color: white;
+        }
+
+        .search-bar {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .search-bar input {
+            width: 50%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
         .container {
@@ -75,43 +88,14 @@
 
         .job-card h3 {
             margin: 10px 0;
-            color: #142e54; /* Dark blue for job title */
+            color: #142e54;
             font-size: 18px;
         }
 
         .job-card p {
             margin: 5px 0;
-            color: #a7967e; /* Warm color for text */
+            color: #a7967e;
             font-size: 14px;
-        }
-
-        .job-card button {
-            margin-top: 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: #142e54; /* Dark blue for buttons */
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            font-weight: bold;
-        }
-
-        .job-card button:hover {
-            background: #a7967e; /* Warm hover effect for button */
-        }
-
-        /* Button container style */
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .button-container button {
-            flex: 1;
         }
     </style>
 </head>
@@ -120,83 +104,68 @@
         <a href="/" class="home-btn">Home</a>
         <h1>Job Listings</h1>
     </div>
+    
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for jobs..." onkeyup="searchJobs()">
+    </div>
+    
     <div class="container" id="job-container">
         <!-- Job cards will be populated here -->
     </div>
 
     <script>
-        // Fetch jobs from the server and populate the UI
+        let jobsData = [];
+
+        function searchJobs() {
+            const searchValue = document.getElementById('searchInput').value.toLowerCase();
+            const jobContainer = document.getElementById('job-container');
+            jobContainer.innerHTML = '';
+
+            jobsData.filter(job => 
+                job.jobTitle.toLowerCase().includes(searchValue) ||
+                job.companyName.toLowerCase().includes(searchValue) ||
+                job.jobLocation.toLowerCase().includes(searchValue)
+            ).forEach(job => createJobCard(job));
+        }
+
+        function createJobCard(job) {
+            const jobContainer = document.getElementById('job-container');
+            const jobCard = document.createElement('div');
+            jobCard.classList.add('job-card');
+
+            const jobImage = document.createElement('img');
+            jobImage.src = `/static/img/${job.companyName.toLowerCase()}.png`;
+            jobImage.alt = `${job.companyName} Logo`;
+            jobImage.onerror = () => {
+                jobImage.src = "/static/img/default-placeholder.png";
+            };
+            jobCard.appendChild(jobImage);
+
+            const content = document.createElement('div');
+            content.classList.add('content');
+            content.innerHTML = `
+                <h3>${job.jobTitle}</h3>
+                <p><strong>Company:</strong> ${job.companyName}</p>
+                <p><strong>Location:</strong> ${job.jobLocation}</p>
+                <p><strong>Salary:</strong> $${job.baseSalary}</p>
+            `;
+            jobCard.appendChild(content);
+
+            const button = document.createElement('button');
+            button.textContent = 'View Details';
+            button.addEventListener('click', () => {
+                alert(`Job Description: ${job.jobDescription}`);
+            });
+            jobCard.appendChild(button);
+
+            jobContainer.appendChild(jobCard);
+        }
+
         fetch('/getJobs')
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('Failed to fetch jobs');
-                }
-            })
+            .then(response => response.json())
             .then(data => {
-                const jobContainer = document.getElementById('job-container');
-                data.forEach(job => {
-                    // Create a job card
-                    const jobCard = document.createElement('div');
-                    jobCard.classList.add('job-card');
-
-                    // Add job image
-                    const jobImage = document.createElement('img');
-                    jobImage.src = `/static/img/${job.companyName.toLowerCase()}.png`; 
-                    jobImage.alt = `${job.companyName} Logo`;
-                    jobImage.onerror = () => {
-                        jobImage.src = "/static/img/default-placeholder.png"; // Fallback image
-                    };
-                    jobCard.appendChild(jobImage);
-
-                    // Add job details
-                    const content = document.createElement('div');
-                    content.classList.add('content');
-                    content.innerHTML = `
-                        <h3>${job.jobTitle}</h3>
-                        <p><strong>Company:</strong> ${job.companyName}</p>
-                        <p><strong>Location:</strong> ${job.jobLocation}</p>
-                        <p><strong>Salary:</strong> $${job.baseSalary}</p>
-                    `;
-                    jobCard.appendChild(content);
-
-                    // Add "View Details" button
-                    const button = document.createElement('button');
-                    button.textContent = 'View Details';
-                    button.addEventListener('click', () => {
-                        alert(`Job Description: ${job.jobDescription}`);
-                    });
-                    jobCard.appendChild(button);
-
-                    // Add "Apply Now" button
-                    const applyButton = document.createElement('button');
-                    applyButton.textContent = 'Apply Now';
-                    applyButton.addEventListener('click', () => {
-                        const companyName = job.companyName;
-                        alert(`Successfully applied for: ${companyName}`);
-                        fetch('/send-apply-job-email', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        //body: JSON.stringify({ email: session['user'], msg: `Successfully applied for: ${job.companyName}` }),
-                        body: JSON.stringify({ companyName: companyName }),
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log('Apply job email sent successfully!');
-                        })
-                        .catch(error => {
-                            console.error('Error sending email:', error);
-                        });
-                        //alert(`Successfully applied for: ${job.companyName}`);
-                    });
-                    jobCard.appendChild(applyButton);
-
-                    // Append job card to the container
-                    jobContainer.appendChild(jobCard);
-                });
+                jobsData = data;
+                data.forEach(job => createJobCard(job));
             })
             .catch(error => {
                 console.error('Error:', error);

@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/styles.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>HiIsCool</title>
     <style>  
       /* Carousel Styles */
@@ -111,6 +112,36 @@
         z-index: 10;
       }
 
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f2f2f2;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+        z-index: 1;
+        text-align: center;
+        width: 150px;
+    }
+
+    .profile-container:hover .dropdown-menu {
+        display: block;
+    }
+
+
+    .dropdown-item {
+        padding: 10px;
+        text-decoration: none;
+        color: #142E54;
+        display: block;
+    }
+
+    .dropdown-item:hover {
+        background-color: #eaeaea;
+    }
+
       .profile-container {
         display: inline-block;
         position: relative;
@@ -127,7 +158,7 @@
       }
 
       .intro-section h2 {
-        font-size: 70px;
+        font-size: 75px;
         font-weight: bold;
         margin: 70px 0 40px 0; /* Increased top margin to push the heading down */
       }
@@ -215,18 +246,33 @@
   }
 </style>
 
-              <li><a href="/login" class="join" style="text-decoration: none; color: #142E54;">Login</a></li>
+              <!-- <li><a href="/login" class="join" style="text-decoration: none; color: #142E54;">Login</a></li> -->
+              {% if not user %}
+                <li><a href="/login" class="join" style="text-decoration: none; color: #142E54;">Login</a></li>
+              {% endif %}
           </ul>
       </nav>
   
       <!-- Profile Picture Section -->
-      <div class="profile-container">
-          <img src="/static/img/defaultProfile.jpg" alt="Profile Picture" class="profile-pic">
-          <span class="hover-text">Hello {{session['user']}}</span>
-      </div>
+<div class="profile-container dropdown" style="position: relative; display: inline-block;">
+    <img src="/static/img/defaultProfile.jpg" alt="Profile Picture" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" style="position: absolute !important; right: 0; z-index: 9999 !important;">
+        {% if user %}
+            <span class="dropdown-item-text">Hello {{ user }}</span>
+            <a class="dropdown-item" href="/profile">Profile</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+        {% endif %}
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+
   </header>
-  
-  <script>
+
+
+ <script>
       // JavaScript for showing and hiding the dropdown
       const resourcesMenu = document.querySelector('li > a[href="/resources"]').parentElement;
       const dropdown = resourcesMenu.querySelector('ul');

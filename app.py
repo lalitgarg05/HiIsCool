@@ -23,7 +23,8 @@ SCOPES = ['https://www.googleapis.com/auth/gmail.send']
 # Home route
 @app.route('/')
 def home():
-    return render_template('index.html')
+    user = session.get('user')
+    return render_template('index.html', user=user)
     # if 'user' in session:
     #     return render_template('index.html', user=session['user'])
     # return redirect('/login')
@@ -93,52 +94,59 @@ def privacy():
 def contact():
     return render_template('contactUs.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 # Add jobs route
-@app.route('/addjobs1', methods=['POST'])
-def addJobs1():
-    if 'user' not in session:
-        return redirect('/login')
+# @app.route('/addjobs1', methods=['POST'])
+# def addJobs1():
+#     if 'user' not in session:
+#         return redirect('/login')
 
-    try:
-        # Parse job details from the request body
-        # data = request.get_json()
-        # jobTitle = data.get('jobTitle')
-        # jobDescription = data.get('jobDescription')
-        # companyName = data.get('companyName')
-        # jobLocation = data.get('jobLocation')
-        # baseSalary = data.get('baseSalary')
-        jobTitle = request.form['jobTitle']
-        jobDescription = request.form['jobDescription']
-        companyName = request.form['companyName']
-        jobLocation = request.form['jobLocation']
-        baseSalary = request.form['baseSalary']
-        flash('XXXX ' + jobTitle)
+#     try:
+#         # Parse job details from the request body
+#         # data = request.get_json()
+#         # jobTitle = data.get('jobTitle')
+#         # jobDescription = data.get('jobDescription')
+#         # companyName = data.get('companyName')
+#         # jobLocation = data.get('jobLocation')
+#         # baseSalary = data.get('baseSalary')
+#         jobTitle = request.form['jobTitle']
+#         jobDescription = request.form['jobDescription']
+#         companyName = request.form['companyName']
+#         jobLocation = request.form['jobLocation']
+#         baseSalary = request.form['baseSalary']
+#         flash('XXXX ' + jobTitle)
 
-        # Validate input
-        # if not jobTitle or not jobDescription or not companyName or not jobLocation:
-        #     return jsonify({'error': 'All fields are required'}), 400
+#         # Validate input
+#         # if not jobTitle or not jobDescription or not companyName or not jobLocation:
+#         #     return jsonify({'error': 'All fields are required'}), 400
 
-        # Connect to the database and insert job
-        conn = mysql.connector.connect(**db_config)
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO jobs (job_title, job_description, company_name, salary, job_location)
-            VALUES (%s, %s, %s, %s, %s)
-        ''', (jobTitle, jobDescription, companyName, baseSalary, jobLocation))
-        conn.commit()
-        conn.close()
+#         # Connect to the database and insert job
+#         conn = mysql.connector.connect(**db_config)
+#         cursor = conn.cursor()
+#         cursor.execute('''
+#             INSERT INTO jobs (job_title, job_description, company_name, salary, job_location)
+#             VALUES (%s, %s, %s, %s, %s)
+#         ''', (jobTitle, jobDescription, companyName, baseSalary, jobLocation))
+#         conn.commit()
+#         conn.close()
 
-        return jsonify({'message': 'Job added successfully!'}), 201
-    except Error as e:
-        return jsonify({'error': f'Database error: {e}'}), 500
-    except Exception as e:
-        return jsonify({'error': f'Unexpected error: {e}'}), 500
+#         return jsonify({'message': 'Job added successfully!'}), 201
+#     except Error as e:
+#         return jsonify({'error': f'Database error: {e}'}), 500
+#     except Exception as e:
+#         return jsonify({'error': f'Unexpected error: {e}'}), 500
 
 # Register route
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        data = request.get_json()
+        if request.is_json:
+            data = request.get_json()
+        else:
+            return jsonify({'error': 'Request content type must be application/json'}), 400
         print(f"Received data: {data}")
         email = data.get('email')
         password = data.get('password')
@@ -154,10 +162,10 @@ def register():
             flash('Registration successful! Please log in.')
             return redirect('/login')
         except mysql.connector.IntegrityError:
-            print('Username already exists.')
+            flash('Username already exists.')
         except Error as e:
             #flash(f'Database error: {e}')
-            print(f'Database error: {e}')
+            flash(f'Database error: {e}')
     return render_template('register.html')
 
 # Register route
@@ -181,6 +189,50 @@ def register1():
         except Error as e:
             flash(f'Database error: {e}')
     return render_template('register.html')
+
+# Route to add or update user profile
+@app.route('/addProfile', methods=['POST'])
+def addProfile():
+    
+    data = request.get_json()
+    print(f"Hello {data}")
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        name = data.get('name')
+        email = data.get('email')
+        phone = data.get('phone')
+        skills = data.get('skills')
+        grade_level = data.get('grade_level')
+        school_name = data.get('school_name')
+        bio = data.get('bio')
+        interests = data.get('interests')
+        gpa = data.get('gpa')
+        extracurricular = data.get('extracurricular')
+        cursor.execute('''
+            INSERT INTO students (name, email, phone, skills, grade_level, school_name, bio, interests, gpa, extracurricular)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+                email = VALUES(email),
+                phone = VALUES(phone),
+                skills = VALUES(skills),
+                grade_level = VALUES(grade_level),
+                school_name = VALUES(school_name),
+                bio = VALUES(bio),
+                interests = VALUES(interests),
+                gpa = VALUES(gpa),
+                extracurricular = VALUES(extracurricular)
+        ''', (name, email, phone, skills, grade_level, school_name, bio, interests, gpa, extracurricular))
+        conn.commit()
+        conn.close()
+        flash('Profile updated successfully!')
+        return redirect('/')
+    except mysql.connector.IntegrityError:
+        flash('Profile already exists.')
+        return jsonify({'error': 'Profile already exists.'}), 400
+    except Error as e:
+        print(f'Database error: {e}')
+        return jsonify({'error': f'Database error: {e}'}), 500
 
 # Logout route
 @app.route('/logout')
@@ -222,6 +274,7 @@ def addJobs():
         return jsonify({'error': f'Database error: {e}'}), 500
     except Exception as e:
         return jsonify({'error': f'Unexpected error: {e}'}), 500
+
 
 @app.route('/getJobs', methods=['GET'])
 def get_jobs():
