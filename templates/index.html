@@ -3,6 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../static/styles.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <title>HiIsCool</title>
     <style>  
       /* Carousel Styles */
@@ -111,6 +112,36 @@
         z-index: 10;
       }
 
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #f2f2f2;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ccc;
+        z-index: 1;
+        text-align: center;
+        width: 150px;
+    }
+
+    .profile-container:hover .dropdown-menu {
+        display: block;
+    }
+
+
+    .dropdown-item {
+        padding: 10px;
+        text-decoration: none;
+        color: #142E54;
+        display: block;
+    }
+
+    .dropdown-item:hover {
+        background-color: #eaeaea;
+    }
+
       .profile-container {
         display: inline-block;
         position: relative;
@@ -127,7 +158,7 @@
       }
 
       .intro-section h2 {
-        font-size: 70px;
+        font-size: 75px;
         font-weight: bold;
         margin: 70px 0 40px 0; /* Increased top margin to push the heading down */
       }
@@ -135,6 +166,7 @@
       .gradient-text {
         background: linear-gradient(to right, #EAE6DF, #A7967E, #142E54);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
 
@@ -188,27 +220,62 @@
               <li><a href="/addNewJob" style="text-decoration: none; color: #142E54;">Post a Job</a></li>
               <li><a href="/jobs" style="text-decoration: none; color: #142E54;">Find a Job</a></li>
               
-              <!-- Resources with Dropdown -->
-              <li style="position: relative;">  
-                <a href="/resources" style="text-decoration: none; color: #142E54;">Resources</a>
-                <ul style="position: absolute; top: 100%; left: 0; background-color: #f2f2f2; display: none; list-style: none; padding: 0; margin: 0; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                    <li><a href="/faq" style="text-decoration: none; color: #142E54; padding: 10px 20px; display: block; text-align: left;">FAQ</a></li></br>
-                    <li><a href="/contactUs" style="text-decoration: none; color: #142E54; padding: 10px 20px; display: block; text-align: left;">Contact Us</a></li>
-                </ul>
-            </li>
-  
-              <li><a href="/login" class="join" style="text-decoration: none; color: #142E54;">Login</a></li>
+<!-- Resources with Dropdown -->
+<li style="position: relative;">  
+  <a href="/resources" style="text-decoration: none; color: #142E54;">Resources</a>
+  <ul style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #f2f2f2; display: none; list-style: none; padding: 0; margin: 0; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; width: 150px;">
+      <li style="padding: 3px 0;"><a href="/faq" style="text-decoration: none; color: #142E54; display: block;">FAQ</a></li>
+      <li style="padding: 10px 0;"><a href="/contactUs" style="text-decoration: none; color: #142E54; display: block;">Contact Us</a></li>
+  </ul>
+</li>
+
+<style>
+  /* Show the dropdown menu when hovering over the parent list item */
+  li:hover > ul {
+      display: block;
+  }
+
+  /* Ensure dropdown items stack vertically */
+  li ul li {
+      display: block;
+      text-align: center;
+  }
+
+  /* Add padding and alignment to dropdown items */
+  li ul li a {
+      padding: 10px;
+  }
+</style>
+
+              <!-- <li><a href="/login" class="join" style="text-decoration: none; color: #142E54;">Login</a></li> -->
+              {% if not user %}
+                <li><a href="/login" class="join" style="text-decoration: none; color: #142E54;">Login</a></li>
+              {% endif %}
           </ul>
       </nav>
   
       <!-- Profile Picture Section -->
-      <div class="profile-container">
-          <img src="/static/img/defaultProfile.jpg" alt="Profile Picture" class="profile-pic">
-          <span class="hover-text">Hello</span>
-      </div>
+      {% if user %}
+<div class="profile-container dropdown" style="position: relative; display: inline-block;">
+    <img src="/static/img/defaultProfile.jpg" alt="Profile Picture" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown" style="position: absolute !important; right: 0; z-index: 9999 !important;">
+
+            <span class="dropdown-item-text">Hello {{ user }}</span>
+            <a class="dropdown-item" href="/profile">Profile</a>
+            <a class="dropdown-item" href="/logout">Logout</a>
+
+    </div>
+</div>
+{% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>  
+
   </header>
-  
-  <script>
+
+
+ <script>
       // JavaScript for showing and hiding the dropdown
       const resourcesMenu = document.querySelector('li > a[href="/resources"]').parentElement;
       const dropdown = resourcesMenu.querySelector('ul');
@@ -289,35 +356,43 @@
   <body>
     <section class="accomplishments">
       <div class="accomplishments-content">
-        <h2>Our Accomplishments</h2>
+        <h2> What Makes Us Unique</h2>
         <div class="accomplishment-list">
           <div class="accomplishment-item">
-            <h3>Award-Winning Service</h3>
-            <p>Recognized as the "Best Remote Work Platform" by Global Tech Awards.</p>
+            <h3>Made for Students</h3>
+            <p>HiIsCool is designed specifically for high school students, making it easy and fun to use.</p>
           </div>
           <div class="accomplishment-item">
-            <h3>Global Impact</h3>
-            <p>Connected multiple professionals across 10+ countries, empowering a truly global workforce.</p>
+            <h3>Connects to Opportunities</h3>
+            <p>It matches students with businesses or individuals looking for skills like theirs.</p>
           </div>
           <div class="accomplishment-item">
-            <h3>Rapid Growth</h3>
-            <p>Achieved a 300% increase in user engagement within the first week of launching.</p>
+            <h3>Looks Professional</h3>
+            <p>HiIsCool provides a professional platform for showcasing student talents and achievements.</p>
           </div>
           <div class="accomplishment-item">
-            <h3>Diverse Clientele</h3>
-            <p>Partnered with 500+ companies, ranging from innovative startups to Fortune 500 enterprises.</p>
+            <h3>All in One Place</h3>
+            <p>From finding opportunities to preparing for interviews, everything is accessible in one place.</p>
           </div>
           <div class="accomplishment-item">
-            <h3>Community Building</h3>
-            <p>Hosted 50+ virtual events and webinars, fostering learning and networking opportunities for remote professionals.</p>
+            <h3>We Believe in Every Teen’s Potential</h3>
+            <p>We’re dedicated to helping students shine and recognize every talent.</p>
           </div>
           <div class="accomplishment-item">
-            <h3>Sustainability Commitment</h3>
-            <p>Reduced carbon footprints for companies by enabling 100+ employees to work remotely.</p>
+            <h3>Made for Companies</h3>
+            <p>Companies can quickly and easily add jobs and get students to work for them.</p>
+          </div>
+          <div class="accomplishment-item">
+            <h3>Tailored for High School Life</h3>
+            <p>Recognizes that students have unique needs, such as flexible hours and part-time opportunities, and designs the platform accordingly.</p>
+          </div>
+          <div class="accomplishment-item">
+            <h3>Feedback & Support</h3>
+            <p>Offers guidance and feedback from industry professionals to help students grow their skills.</p>
           </div>
         </div>
       </div>
-    </section>
+    </section>    
   </body>
 </html>
 
@@ -396,20 +471,20 @@
         <h2>Explore New Job Opportunities</h2>
         <div class="job-list">
           <div class="job-item">
-            <h3>Software Engineer</h3>
-            <p>Join our team and help build innovative solutions. Remote work available.</p>
+            <h3>Kroger</h3>
+            <p>Work as a cashier. 2 years of experience. Location: Alpharetta. Salary 40,000</p>
           </div>
           <div class="job-item">
-            <h3>Product Manager</h3>
-            <p>Lead product development and strategy. Excellent growth opportunities.</p>
+            <h3>Costco</h3>
+            <p>Counting money as a Casheir and need NO experience. Location: Atlanta. Salary: 1,000,000 </p>
           </div>
           <div class="job-item">
-            <h3>Data Analyst</h3>
-            <p>Analyze complex datasets to help shape business decisions. Remote work available.</p>
+            <h3>Publix</h3>
+            <p>Work as manager to make sure the employees are doing what they Should. Location: Atlana. Salary: 50,000.</p>
           </div>
           <div class="job-item">
-            <h3>UX/UI Designer</h3>
-            <p>Create beautiful and intuitive user experiences. Join a dynamic design team.</p>
+            <h3>Google</h3>
+            <p>Software Engineer to create webites. Work from home. Salary: 155,000</p>
           </div>
         </div>
 
@@ -529,38 +604,42 @@
   <body>
     <!-- Why Companies Should Use Us Section -->
     <section class="why-us-section">
-      <h2>Why Companies Should Choose Our Platform</h2>
+      <h2>How We Empower Students</h2>
       <div class="why-us-container">
         <div class="why-us-box">
-          <h3>Access to Top Talent</h3>
-          <p>Tap into a global pool of skilled professionals, ensuring you find the perfect match for your remote team.</p>
+          <h3>Build Real-World Skills</h3>
+          <p>Gain access to tools and opportunities that help you develop practical skills for your future career.</p>
         </div>
         <div class="why-us-box">
-          <h3>Streamlined Hiring Process</h3>
-          <p>Simplify recruitment with our user-friendly platform, reducing time-to-hire by up to 50%.</p>
+          <h3>Explore New Opportunities</h3>
+          <p>Discover internships, part-time jobs, and volunteer roles tailored to your interests and talents.</p>
         </div>
         <div class="why-us-box">
-          <h3>Enhanced Visibility</h3>
-          <p>Showcase your company culture and job openings to a targeted audience of remote work enthusiasts.</p>
+          <h3>Showcase Your Talents</h3>
+          <p>Create a portfolio to highlight your projects, achievements, and unique skills in one professional space.</p>
         </div>
         <div class="why-us-box">
-          <h3>Cost Efficiency</h3>
-          <p>Save on traditional recruitment costs and office expenses by embracing a distributed workforce.</p>
+          <h3>Learn From Experts</h3>
+          <p>Access resources and mentorship from industry leaders to guide you toward success.</p>
         </div>
         <div class="why-us-box">
-          <h3>Scalable Solutions</h3>
-          <p>Whether you're a startup or an enterprise, our platform adapts to your growth needs.</p>
+          <h3>Prepare for the Future</h3>
+          <p>Master resume writing, interview techniques, and career planning with our tailored resources.</p>
         </div>
         <div class="why-us-box">
-          <h3>Trusted by Industry Leaders</h3>
-          <p>Join the ranks of companies who trust us to build and grow their remote teams.</p>
+          <h3>Connect with Like-Minded Peers</h3>
+          <p>Join a community of students who share your passion for learning, growth, and achievement.</p>
         </div>
         <div class="why-us-box">
-          <h3>Support for Success</h3>
-          <p>Gain insights, tools, and resources to thrive in the evolving world of remote work.</p>
+          <h3>Track Your Progress</h3>
+          <p>Set goals, monitor your achievements, and celebrate milestones as you grow your skills.</p>
+        </div>
+        <div class="why-us-box">
+          <h3>Empower Your Potential</h3>
+          <p>We believe in every student’s ability to succeed and strive to provide the tools to make it happen.</p>
         </div>
       </div>
-    </section>
+    </section>    
   </body>
 </html>
 

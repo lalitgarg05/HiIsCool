@@ -215,7 +215,7 @@
             .then(response => {
                 if (response.ok) {
                     alert('Job added successfully!');
-                    window.location.href = '/hiring'; // Redirect to home page
+                    window.location.href = '/'; // Redirect to home page
                 } else {
                     response.json().then(data => {
                         alert(`Error: ${data.error}`);

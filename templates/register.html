@@ -7,82 +7,75 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #89c4e1, #6aaed6);
+            background: linear-gradient(to bottom, #c2ccc5, #eae6df); /* Gradient from light gray to beige */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            color: #333;
         }
         .container {
             width: 450px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #2b6777;
+            color: #142e54; /* Dark blue for the heading */
+            font-size: 24px;
         }
         form {
             display: flex;
             flex-direction: column;
         }
         label {
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-weight: bold;
+            color: #142e54; /* Teal color for labels */
         }
         input {
             margin-bottom: 15px;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 16px;
         }
-        input:focus {
-            border-color: #2b6777;
-            outline: none;
-        }
         button {
-            padding: 12px;
+            padding: 10px;
             border: none;
-            border-radius: 6px;
-            background: #2b6777;
-            color: #fff;
-            font-size: 18px;
+            border-radius: 4px;
+            background: #142e54; /* Dark blue for the button */
+            color: white;
+            font-size: 16px;
             cursor: pointer;
             transition: background 0.3s ease;
         }
         button:hover {
-            background: #185a65;
+            background: #a7967e; /* Warm color for button hover */
         }
         .terms {
-            font-size: 14px;
             margin-bottom: 20px;
+            font-size: 14px;
             text-align: center;
-            line-height: 1.5;
+            color: #333;
         }
         .terms a {
-            color: #2b6777;
+            color: #2b6777; /* Teal color for links */
             text-decoration: none;
-            font-weight: bold;
         }
         .terms a:hover {
             text-decoration: underline;
         }
         .toggle {
             text-align: center;
-        }
-        .toggle p {
             font-size: 14px;
         }
         .toggle a {
             text-decoration: none;
-            color: #2b6777;
-            font-weight: bold;
+            color: #2b6777; /* Teal color for the toggle link */
         }
         .toggle a:hover {
             text-decoration: underline;
@@ -125,6 +118,7 @@
 
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const msg = 'Successfully registered!';
 
             fetch('/register', {
                 method: 'POST',
@@ -136,11 +130,40 @@
             .then(response => response.json())
             .then(data => {
                 alert('Registration successful!');
+                fetch('/send-email', {     
+                   method: 'POST',
+                   headers: {
+                       'Content-Type': 'application/json',
+                   },
+                   body: JSON.stringify({ email: email }),
+               })
+               .then(response => response.json())
+               .then(data => {
+                   console.log('Email sent successfully!');
+               })
+               .catch(error => {
+                   console.error('Error sending email:', error);
+               });
+                window.location.href = '/login';
             })
             .catch(error => {
                 console.error('Error:', error);
                 //alert('Registration failed!');
                 alert('Registration successful!');
+                fetch('/send-email', {    
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Email sent successfully!');
+                })
+                .catch(error => {
+                    console.error('Error sending email:', error);
+                });
                 window.location.href = '/login';
             });
         });
