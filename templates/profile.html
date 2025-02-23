@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Profile - HI IS COOL</title>
+    <title>HIISCOOL- Student Profile </title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,115 +52,117 @@
 </head>
 <body>
 
-    <div class="container">
-        <h2>Student Profile</h2>
-        <form id="profile-form" action="/getProfile" method="post">
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="name" style="flex: 1; font-size: 14px;">Name:</label>
-                <input type="text" id="name" name="name" style="flex: 2;" required>
-            </div>
+<div class="container">
+    <h2>Student Profile</h2>
+    <form id="profile-form" action="/getProfile" method="post">
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="name" style="flex: 1; font-size: 14px;">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" style="flex: 2;" required>
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="email" style="flex: 1; font-size: 14px;">Email:</label>
-                <input type="email" id="email" name="email" style="flex: 2;" required>
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="email" style="flex: 1; font-size: 14px;">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" style="flex: 2;" required>
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="phone" style="flex: 1; font-size: 14px;">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" style="flex: 2;" required>
-            </div>
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="skills" style="flex: 1; font-size: 14px;">Skills:</label>
-                <input type="text" id="skills" name="skills" placeholder="E.g., Coding, Writing, Design" style="flex: 2;">
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="phone" style="flex: 1; font-size: 14px;">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" style="flex: 2;" required>
+        </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="skills" style="flex: 1; font-size: 14px;">Skills:</label>
+            <input type="text" id="skills" name="skills" placeholder="E.g., Coding, Writing, Design" style="flex: 2;">
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="grade" style="flex: 1; font-size: 14px;">Grade Level:</label>
-                <select id="grade" name="grade" style="flex: 2;">
-                    <option value="9">9th</option>
-                    <option value="10">10th</option>
-                    <option value="11">11th</option>
-                    <option value="12">12th</option>
-                </select>
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="grade" style="flex: 1; font-size: 14px;">Grade Level:</label>
+            <select id="grade" name="grade" style="flex: 2;">
+                <option value="9">9th</option>
+                <option value="10">10th</option>
+                <option value="11">11th</option>
+                <option value="12">12th</option>
+            </select>
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="school" style="flex: 1; font-size: 14px;">School Name:</label>
-                <input type="text" id="school" name="school" style="flex: 2;" required>
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="school" style="flex: 1; font-size: 14px;">School Name:</label>
+            <input type="text" id="school" name="school" placeholder="Enter your school name" style="flex: 2;" required>
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="bio" style="flex: 1; font-size: 14px;">Short Bio:</label>
-                <textarea id="bio" name="bio" rows="4" placeholder="Tell us a little about yourself" style="flex: 2;"></textarea>
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="bio" style="flex: 1; font-size: 14px;">Short Bio:</label>
+            <textarea id="bio" name="bio" rows="4" placeholder="Tell us a little about yourself" style="flex: 2;"></textarea>
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="interests" style="flex: 1; font-size: 14px;">Interests & Hobbies:</label>
-                <input type="text" id="interests" name="interests" placeholder="E.g., Chess, Basketball, AI Development" style="flex: 2;">
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="interests" style="flex: 1; font-size: 14px;">Interests & Hobbies:</label>
+            <input type="text" id="interests" name="interests" placeholder="E.g., Chess, Basketball, AI Development" style="flex: 2;">
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="gpa" style="flex: 1; font-size: 14px;">GPA:</label>
-                <input type="text" id="gpa" name="gpa" placeholder="E.g., 3.8" style="flex: 2;">
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="gpa" style="flex: 1; font-size: 14px;">GPA:</label>
+            <input type="text" id="gpa" name="gpa" placeholder="E.g., 3.8" style="flex: 2;">
+        </div>
 
-            <div style="display: flex; align-items: center; margin-bottom: 10px;">
-                <label for="extracurricular" style="flex: 1; font-size: 14px;">Extracurricular Activities:</label>
-                <input type="text" id="extracurricular" name="extracurricular" placeholder="E.g., Debate Club, Soccer Team" style="flex: 2;">
-            </div>
+        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <label for="extracurricular" style="flex: 1; font-size: 14px;">Extracurricular Activities:</label>
+            <input type="text" id="extracurricular" name="extracurricular" placeholder="E.g., Debate Club, Soccer Team" style="flex: 2;">
+        </div>
 
-            <button type="submit">Submit Profile</button>
-        </form>
-    </div>
+        <button type="submit">Submit Profile</button>
+    </form>
+</div>
 
-    <script>
-        // Fetch user data and populate the form
-        window.onload = function() {
-            fetch('/getUserProfile')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('name').value = data.name;
-                    document.getElementById('email').value = data.email;
-                    document.getElementById('phone').value = data.phone;
-                    document.getElementById('skills').value = data.skills;
-                    document.getElementById('grade').value = data.grade_level;
-                    document.getElementById('school').value = data.school_name;
-                    document.getElementById('bio').value = data.bio;
-                    document.getElementById('interests').value = data.interests;
-                    document.getElementById('gpa').value = data.gpa;
-                    document.getElementById('extracurricular').value = data.extracurricular;
-                })
-                .catch(error => {
-                    console.error('Error fetching user data:', error);
-                });
+<script>
+    // Fetch user data and populate the form
+    window.onload = function() {
+        fetch('/getUserProfile')
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    document.getElementById('name').value = data.name || '';
+                    document.getElementById('email').value = data.email || '';
+                    document.getElementById('phone').value = data.phone || '';
+                    document.getElementById('skills').value = data.skills || '';
+                    document.getElementById('grade').value = data.grade_level || '';
+                    document.getElementById('school').value = data.school_name || '';
+                    document.getElementById('bio').value = data.bio || '';
+                    document.getElementById('interests').value = data.interests || '';
+                    document.getElementById('gpa').value = data.gpa || '';
+                    document.getElementById('extracurricular').value = data.extracurricular || '';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+    };
+
+    // Handle form submission
+    document.getElementById('profile-form').addEventListener('submit', function(e) {
+        e.preventDefault();  // Prevent default form submission
+
+        // Extract form data
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            skills: document.getElementById('skills').value,
+            grade: document.getElementById('grade').value,
+            school: document.getElementById('school').value,
+            bio: document.getElementById('bio').value,
+            interests: document.getElementById('interests').value,
+            gpa: document.getElementById('gpa').value,
+            extracurricular: document.getElementById('extracurricular').value
         };
 
-        // Handle form submission
-        document.getElementById('profile-form').addEventListener('submit', function(e) {
-            e.preventDefault();  // Prevent default form submission
-
-            // Extract form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                skills: document.getElementById('skills').value,
-                grade: document.getElementById('grade').value,
-                school: document.getElementById('school').value,
-                bio: document.getElementById('bio').value,
-                interests: document.getElementById('interests').value,
-                gpa: document.getElementById('gpa').value,
-                extracurricular: document.getElementById('extracurricular').value
-            };
-
-            // Send data using fetch API
-            fetch('/updateProfile', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            })
+        // Send data using fetch API
+        fetch('/updateProfile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
             .then(response => {
                 if (response.ok) {
                     alert('Profile submitted successfully!');
@@ -175,8 +177,8 @@
                 console.error('Error:', error);
                 alert('An unexpected error occurred.');
             });
-        });
-    </script>
-    
+    });
+</script>
+
 </body>
 </html>
